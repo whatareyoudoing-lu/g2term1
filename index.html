@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Little Panda’s Adventure — 小熊猫的奇妙一天</title>
+  <title>Little Panda’s Adventure — 小熊猫的奇妙一天 (Edition 2)</title>
   <style>
     /* ==========================================================================
-       1. BASE & RESET (Offline-ready, Kid-friendly Typography & Palette)
+       1. BASE & RESET (Kid-friendly, Bright, Offline-Ready)
        ========================================================================== */
     :root {
-      --bg-sky: #e0f4ff;
       --bg-cream: #fffdf7;
       --primary-orange: #ff9f1c;
       --primary-orange-dark: #e08200;
@@ -17,7 +16,7 @@
       --secondary-green-dark: #1fa396;
       --accent-pink: #ff6b6b;
       --accent-yellow: #ffd166;
-      --accent-purple: #8338ec;
+      --accent-purple: #7209b7;
       --text-dark: #2b2d42;
       --text-muted: #5c6378;
       --card-shadow: 0 10px 25px rgba(43, 45, 66, 0.12);
@@ -45,18 +44,18 @@
     }
 
     /* ==========================================================================
-       2. TOP NAVIGATION BAR (Progress, Pinyin Toggle, Sound Toggle)
+       2. TOP HEADER BAR
        ========================================================================== */
     .top-bar {
       width: 100%;
-      max-width: 1020px;
+      max-width: 1040px;
       padding: 12px 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      z-index: 50;
+      z-index: 40;
     }
 
     .brand-badge {
@@ -83,7 +82,7 @@
       border-radius: 999px;
       font-size: 0.9rem;
       font-weight: bold;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.75);
       color: var(--text-muted);
       border: 2px solid transparent;
       transition: all 0.3s ease;
@@ -136,7 +135,7 @@
        ========================================================================== */
     .game-container {
       width: 95%;
-      max-width: 980px;
+      max-width: 1000px;
       background: var(--bg-cream);
       border-radius: var(--border-radius-lg);
       box-shadow: var(--card-shadow);
@@ -144,7 +143,7 @@
       padding: 20px;
       margin-bottom: 24px;
       position: relative;
-      min-height: 580px;
+      min-height: 600px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -159,7 +158,7 @@
       justify-content: center;
       align-items: flex-end;
       gap: 4px;
-      line-height: 1.2;
+      line-height: 1.25;
     }
 
     .zh-word {
@@ -171,9 +170,9 @@
 
     .pinyin-text {
       font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 700;
       color: #d94e34;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
       min-height: 1.2em;
       transition: opacity 0.2s ease, visibility 0.2s ease;
     }
@@ -190,10 +189,38 @@
     }
 
     .zh-large .pinyin-text { font-size: 1.15rem; }
-    .zh-large .hanzi-text { font-size: 2.2rem; }
+    .zh-large .hanzi-text { font-size: 2.15rem; }
 
     .zh-small .pinyin-text { font-size: 0.85rem; }
     .zh-small .hanzi-text { font-size: 1.35rem; }
+
+    /* Highlighted Blank Slot in Grammar Sentences */
+    .blank-slot {
+      display: inline-block;
+      min-width: 68px;
+      padding: 2px 12px;
+      margin: 0 4px;
+      border-bottom: 4px solid #ff9f1c;
+      background: #fff3b0;
+      border-radius: 8px;
+      color: #e08200;
+      font-weight: 900;
+      font-size: 1.6rem;
+    }
+
+    .slot-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #e0fbfc;
+      border: 3px dashed #2ec4b6;
+      color: #1d3557;
+      font-weight: 900;
+      font-size: 1.2rem;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin: 0 4px;
+    }
 
     /* ==========================================================================
        5. BUTTONS & INTERACTIVE CARDS
@@ -203,7 +230,7 @@
       color: #ffffff;
       border: none;
       padding: 14px 32px;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 800;
       border-radius: 999px;
       cursor: pointer;
@@ -226,7 +253,7 @@
 
     .choice-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
       width: 100%;
       margin-top: 14px;
@@ -274,13 +301,13 @@
     }
 
     .choice-en {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--text-dark);
     }
 
     /* ==========================================================================
-       6. CARTOON SCENE BACKGROUNDS & SVG ANIMATIONS
+       6. CARTOON SCENE BACKGROUNDS & BANNERS
        ========================================================================== */
     .scene-box {
       width: 100%;
@@ -312,7 +339,7 @@
       position: relative;
       display: inline-block;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      max-width: 90%;
+      max-width: 92%;
     }
 
     .instruction-banner {
@@ -320,7 +347,7 @@
       border-left: 6px solid var(--secondary-green);
       padding: 10px 16px;
       border-radius: 12px;
-      font-size: 1.08rem;
+      font-size: 1.06rem;
       font-weight: 700;
       color: #1d3557;
       margin-bottom: 10px;
@@ -329,6 +356,16 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 8px;
+    }
+
+    .skill-tag {
+      background: #7209b7;
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
     }
 
     /* Drag & Drop + Click-to-Select Items */
@@ -409,18 +446,171 @@
       pointer-events: none;
     }
 
-    /* Animations */
+    /* ==========================================================================
+       7. WRONG ANSWER EXPLANATION POP-UP MODAL
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(43, 45, 66, 0.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 999;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .explain-card {
+      background: #ffffff;
+      border: 6px solid #ff6b6b;
+      border-radius: 28px;
+      max-width: 540px;
+      width: 100%;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      animation: popBounce 0.35s ease;
+    }
+
+    .explain-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .explain-title {
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: #e63946;
+      margin: 0;
+    }
+
+    .explain-answer-box {
+      background: #d8f3dc;
+      border: 3px solid #2d6a4f;
+      border-radius: 18px;
+      padding: 12px 16px;
+      margin: 12px 0;
+    }
+
+    .explain-answer-label {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #1b4332;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .explain-text {
+      font-size: 1.1rem;
+      line-height: 1.55;
+      color: #2b2d42;
+      background: #f8f9fa;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border-left: 5px solid #ff9f1c;
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    /* ==========================================================================
+       7B. PICTURE DICTIONARY POP-UP MODAL
+       ========================================================================== */
+    .dict-card {
+      background: #fffdf7;
+      border: 6px solid #2ec4b6;
+      border-radius: 28px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 86vh;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 24px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+      animation: popBounce 0.35s ease;
+    }
+
+    .dict-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+      border-bottom: 3px dashed #bee1e6;
+      padding-bottom: 10px;
+    }
+
+    .dict-search {
+      width: 100%;
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 700;
+      border: 3px solid #cbd5e1;
+      border-radius: 999px;
+      outline: none;
+      margin-bottom: 14px;
+    }
+
+    .dict-search:focus {
+      border-color: #ff9f1c;
+    }
+
+    .dict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 14px;
+      overflow-y: auto;
+      padding: 4px 4px 10px;
+    }
+
+    .dict-item {
+      background: #ffffff;
+      border: 3px solid #dce8f2;
+      border-radius: 18px;
+      padding: 12px 10px;
+      text-align: center;
+      box-shadow: 0 4px 0 #cbd9e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.15s;
+    }
+
+    .dict-item:hover {
+      transform: translateY(-3px);
+      border-color: #ff9f1c;
+    }
+
+    .dict-en {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #457b9d;
+      margin-top: 6px;
+    }
+
+    /* ==========================================================================
+       8. ANIMATIONS & FEEDBACK BAR
+       ========================================================================== */
     @keyframes popBounce {
-      0% { transform: scale(1); }
-      40% { transform: scale(1.12); }
-      70% { transform: scale(0.96); }
+      0% { transform: scale(0.92); }
+      50% { transform: scale(1.06); }
       100% { transform: scale(1); }
     }
 
     @keyframes pandaHappyJump {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      30% { transform: translateY(-22px) rotate(-4deg); }
-      60% { transform: translateY(-10px) rotate(4deg); }
+      30% { transform: translateY(-20px) rotate(-4deg); }
+      60% { transform: translateY(-8px) rotate(4deg); }
     }
 
     @keyframes shake {
@@ -443,18 +633,15 @@
       animation: floatCloud 3s ease-in-out infinite;
     }
 
-    /* ==========================================================================
-       7. FEEDBACK TOAST OVERLAY (Non-blocking, Kid-friendly)
-       ========================================================================== */
     .feedback-bar {
-      min-height: 54px;
+      min-height: 52px;
       margin-top: 12px;
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 8px 16px;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 800;
       transition: all 0.25s ease;
     }
@@ -473,14 +660,6 @@
       animation: popBounce 0.4s ease;
     }
 
-    .feedback-retry {
-      background: #fff3cd;
-      color: #856404;
-      border: 3px solid #ffc107;
-      animation: shake 0.4s ease;
-    }
-
-    /* Start & Certificate Inputs */
     .name-input {
       width: 100%;
       max-width: 340px;
@@ -522,9 +701,14 @@
 
   <!-- TOP HEADER BAR -->
   <header class="top-bar">
-    <div class="brand-badge">
-      <span>🐼</span>
-      <span>Little Panda’s Adventure</span>
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+      <button class="toggle-btn" style="border-color:#ff9f1c; box-shadow:0 4px 0 #e08200;" onclick="openDictModal()">
+        📖 Dictionary 查字典
+      </button>
+      <div class="brand-badge">
+        <span>🐼</span>
+        <span>Little Panda’s Adventure</span>
+      </div>
     </div>
 
     <div class="chapter-pills" id="chapterPills">
@@ -535,7 +719,7 @@
 
     <div class="controls-group">
       <button class="toggle-btn" id="pinyinToggleBtn" onclick="togglePinyin()">
-        👁️ Hide Pinyin
+        🙈 Hide Pinyin
       </button>
       <button class="toggle-btn" id="soundToggleBtn" onclick="toggleSound()">
         🔊 Sound: ON
@@ -548,9 +732,47 @@
     <!-- Dynamic screens rendered via JavaScript -->
   </main>
 
+  <!-- WRONG ANSWER EXPLANATION POP-UP MODAL -->
+  <div class="modal-backdrop" id="explainModal">
+    <div class="explain-card">
+      <div class="explain-header">
+        <div id="explainPandaIcon"></div>
+        <h2 class="explain-title">Oops! Not quite right!</h2>
+      </div>
+      <div class="explain-answer-box">
+        <div class="explain-answer-label">✅ The Correct Answer Is:</div>
+        <div id="explainCorrectAnswer" style="font-size:1.3rem; font-weight:900; color:#1b4332;"></div>
+      </div>
+      <div class="explain-text" id="explainReasonText"></div>
+      <button class="btn-primary" onclick="closeExplainModal()">
+        <span>💡 Got it! Try Again</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PICTURE DICTIONARY MODAL -->
+  <div class="modal-backdrop" id="dictModal" onclick="if(event.target === this) closeDictModal()">
+    <div class="dict-card">
+      <div class="dict-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:1.8rem;">📖</span>
+          <div>
+            <h2 style="margin:0; font-size:1.45rem; color:#1d3557;">Little Panda’s Picture Dictionary</h2>
+            <div style="font-size:0.88rem; font-weight:700; color:#5c6378;">Bonus Vocabulary Helper (查字典)</div>
+          </div>
+        </div>
+        <button class="toggle-btn" style="border-color:#ff6b6b; box-shadow:0 4px 0 #d90429;" onclick="closeDictModal()">
+          ✖ Close
+        </button>
+      </div>
+      <input type="text" id="dictSearchInput" class="dict-search" placeholder="🔍 Search English, Pinyin, or Chinese (e.g. toy, 电脑, shuā)..." oninput="renderDictItems(this.value)" />
+      <div class="dict-grid" id="dictGrid"></div>
+    </div>
+  </div>
+
   <script>
     /* ==========================================================================
-       1. SOUND EFFECTS ENGINE (Web Audio API - 100% Offline, No External Files)
+       1. SOUND EFFECTS ENGINE (Web Audio API - 100% Offline)
        ========================================================================== */
     let soundEnabled = true;
     let audioCtx = null;
@@ -575,7 +797,7 @@
       osc.type = type;
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
 
-      gain.gain.setValueAtTime(0.18, audioCtx.currentTime + delay);
+      gain.gain.setValueAtTime(0.16, audioCtx.currentTime + delay);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + duration);
 
       osc.connect(gain);
@@ -585,24 +807,18 @@
       osc.stop(audioCtx.currentTime + delay + duration);
     }
 
-    function sfxClick() {
-      playTone(520, 'sine', 0.08);
-    }
-
+    function sfxClick() { playTone(520, 'sine', 0.08); }
     function sfxCorrect() {
-      playTone(523.25, 'triangle', 0.14, 0);     // C5
-      playTone(659.25, 'triangle', 0.14, 0.11);  // E5
-      playTone(783.99, 'triangle', 0.25, 0.22);  // G5
+      playTone(523.25, 'triangle', 0.14, 0);
+      playTone(659.25, 'triangle', 0.14, 0.11);
+      playTone(783.99, 'triangle', 0.25, 0.22);
     }
-
     function sfxWrong() {
       playTone(260, 'sawtooth', 0.16, 0);
       playTone(210, 'sawtooth', 0.22, 0.14);
     }
-
     function sfxChapterWin() {
-      const notes = [523.25, 659.25, 783.99, 1046.50];
-      notes.forEach((n, idx) => playTone(n, 'triangle', 0.22, idx * 0.12));
+      [523.25, 659.25, 783.99, 1046.50].forEach((n, idx) => playTone(n, 'triangle', 0.22, idx * 0.12));
     }
 
     function toggleSound() {
@@ -624,29 +840,24 @@
        2. CUSTOM INLINE SVG CARTOON ARTWORK LIBRARY
        ========================================================================== */
     const SVG_ART = {
-      panda: (mood = 'normal', size = 140) => {
+      panda: (mood = 'normal', size = 135) => {
         const isSad = mood === 'sad';
         const isHappy = mood === 'happy';
         const hasPencil = mood === 'pencil';
+        const isThinking = mood === 'thinking';
         return `
         <svg width="${size}" height="${size}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <!-- Ears -->
           <circle cx="48" cy="48" r="24" fill="#2b2d42"/>
           <circle cx="152" cy="48" r="24" fill="#2b2d42"/>
           <circle cx="48" cy="48" r="11" fill="#5c6378"/>
           <circle cx="152" cy="48" r="11" fill="#5c6378"/>
-          <!-- Body -->
           <ellipse cx="100" cy="155" rx="52" ry="40" fill="#ffffff" stroke="#2b2d42" stroke-width="5"/>
           <path d="M52 135 Q100 155 148 135 L142 162 Q100 175 58 162 Z" fill="#2b2d42"/>
-          <!-- Arms -->
           <ellipse cx="44" cy="145" rx="16" ry="26" transform="rotate(25 44 145)" fill="#2b2d42"/>
           <ellipse cx="156" cy="145" rx="16" ry="26" transform="rotate(-25 156 145)" fill="#2b2d42"/>
-          <!-- Head -->
           <ellipse cx="100" cy="92" rx="64" ry="54" fill="#ffffff" stroke="#2b2d42" stroke-width="5"/>
-          <!-- Eye Patches -->
           <ellipse cx="73" cy="88" rx="18" ry="22" transform="rotate(-18 73 88)" fill="#2b2d42"/>
           <ellipse cx="127" cy="88" rx="18" ry="22" transform="rotate(18 127 88)" fill="#2b2d42"/>
-          <!-- Eyes -->
           ${isHappy || hasPencil ? `
             <path d="M64 88 Q73 76 82 88" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
             <path d="M118 88 Q127 76 136 88" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
@@ -656,20 +867,17 @@
             <circle cx="126" cy="86" r="7" fill="#ffffff"/>
             <circle cx="124" cy="84" r="3" fill="#2b2d42"/>
           `}
-          <!-- Cheeks -->
           <ellipse cx="55" cy="108" rx="10" ry="6" fill="#ffadad" opacity="0.85"/>
           <ellipse cx="145" cy="108" rx="10" ry="6" fill="#ffadad" opacity="0.85"/>
-          <!-- Nose & Mouth -->
           <ellipse cx="100" cy="104" rx="9" ry="6" fill="#2b2d42"/>
-          ${isSad ? `
+          ${isSad || isThinking ? `
             <path d="M88 124 Q100 112 112 124" stroke="#2b2d42" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M60 100 Q54 112 60 116 Q66 112 60 100 Z" fill="#4cc9f0"/>
+            ${isSad ? `<path d="M60 100 Q54 112 60 116 Q66 112 60 100 Z" fill="#4cc9f0"/>` : ''}
           ` : isHappy || hasPencil ? `
             <path d="M84 114 Q100 134 116 114 Z" fill="#ff6b6b" stroke="#2b2d42" stroke-width="3"/>
           ` : `
             <path d="M88 115 Q100 125 112 115" stroke="#2b2d42" stroke-width="4" fill="none" stroke-linecap="round"/>
           `}
-          <!-- Pencil in hand if unlocked -->
           ${hasPencil ? `
             <g transform="translate(132, 100) rotate(25)">
               <rect x="0" y="0" width="16" height="58" rx="3" fill="#ffb703" stroke="#2b2d42" stroke-width="3"/>
@@ -681,32 +889,26 @@
         </svg>`;
       },
 
-      rabbit: (size = 130) => `
+      rabbit: (size = 125) => `
         <svg width="${size}" height="${size}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <!-- Long Ears -->
           <ellipse cx="76" cy="48" rx="15" ry="44" transform="rotate(-10 76 48)" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
           <ellipse cx="76" cy="48" rx="7" ry="30" transform="rotate(-10 76 48)" fill="#ffccd5"/>
           <ellipse cx="124" cy="48" rx="15" ry="44" transform="rotate(10 124 48)" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
           <ellipse cx="124" cy="48" rx="7" ry="30" transform="rotate(10 124 48)" fill="#ffccd5"/>
-          <!-- Body -->
           <ellipse cx="100" cy="158" rx="44" ry="36" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
           <path d="M64 140 L136 140 L142 182 L58 182 Z" fill="#ff758f"/>
-          <!-- Head -->
           <circle cx="100" cy="105" r="48" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
-          <!-- Eyes -->
           <circle cx="82" cy="100" r="6" fill="#2b2d42"/>
           <circle cx="84" cy="98" r="2.5" fill="#ffffff"/>
           <circle cx="118" cy="100" r="6" fill="#2b2d42"/>
           <circle cx="120" cy="98" r="2.5" fill="#ffffff"/>
-          <!-- Cheeks -->
           <ellipse cx="68" cy="114" rx="8" ry="5" fill="#ff8fa3"/>
           <ellipse cx="132" cy="114" rx="8" ry="5" fill="#ff8fa3"/>
-          <!-- Nose & Smile -->
           <polygon points="95,112 105,112 100,118" fill="#ff4d6d"/>
           <path d="M90 122 Q100 132 110 122" stroke="#2b2d42" stroke-width="3.5" fill="none" stroke-linecap="round"/>
         </svg>`,
 
-      pencil: (size = 86) => `
+      pencil: (size = 82) => `
         <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(60,60) rotate(35) translate(-60,-60)">
             <rect x="46" y="14" width="28" height="16" rx="5" fill="#ff758f" stroke="#2b2d42" stroke-width="4"/>
@@ -719,7 +921,7 @@
           </g>
         </svg>`,
 
-      schoolbag: (size = 86) => `
+      schoolbag: (size = 82) => `
         <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
           <path d="M44 28 Q60 10 76 28" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
           <rect x="24" y="30" width="72" height="76" rx="22" fill="#4361ee" stroke="#2b2d42" stroke-width="4"/>
@@ -728,7 +930,7 @@
           <circle cx="60" cy="56" r="6" fill="#ffd166" stroke="#2b2d42" stroke-width="3"/>
         </svg>`,
 
-      book: (size = 86) => `
+      book: (size = 82) => `
         <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
           <rect x="26" y="18" width="68" height="84" rx="10" fill="#2ec4b6" stroke="#2b2d42" stroke-width="4"/>
           <rect x="26" y="18" width="14" height="84" rx="4" fill="#1b9aaa" stroke="#2b2d42" stroke-width="4"/>
@@ -737,41 +939,15 @@
           <line x1="54" y1="49" x2="72" y2="49" stroke="#2b2d42" stroke-width="3"/>
         </svg>`,
 
-      eraser: (size = 86) => `
-        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(60,60) rotate(-25) translate(-60,-60)">
-            <rect x="22" y="40" width="76" height="40" rx="10" fill="#ffffff" stroke="#2b2d42" stroke-width="4"/>
-            <rect x="46" y="40" width="52" height="40" rx="8" fill="#ff6b6b" stroke="#2b2d42" stroke-width="4"/>
-          </g>
-        </svg>`,
-
-      ruler: (size = 86) => `
-        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(60,60) rotate(-35) translate(-60,-60)">
-            <rect x="14" y="42" width="92" height="36" rx="6" fill="#ffd166" stroke="#2b2d42" stroke-width="4"/>
-            <line x1="28" y1="42" x2="28" y2="56" stroke="#2b2d42" stroke-width="3"/>
-            <line x1="44" y1="42" x2="44" y2="52" stroke="#2b2d42" stroke-width="3"/>
-            <line x1="60" y1="42" x2="60" y2="58" stroke="#2b2d42" stroke-width="3"/>
-            <line x1="76" y1="42" x2="76" y2="52" stroke="#2b2d42" stroke-width="3"/>
-            <line x1="92" y1="42" x2="92" y2="56" stroke="#2b2d42" stroke-width="3"/>
-          </g>
-        </svg>`,
-
-      house: (roofColor = '#ff6b6b', wallColor = '#fff3b0', hasBamboo = false, size = 145) => `
+      house: (roofColor = '#ff6b6b', wallColor = '#fff3b0', hasBamboo = false, size = 140) => `
         <svg width="${size}" height="${size}" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-          <!-- Chimney -->
           <rect x="122" y="34" width="18" height="34" rx="4" fill="#8d99ae" stroke="#2b2d42" stroke-width="4"/>
-          <!-- Main Wall -->
           <rect x="34" y="82" width="112" height="82" rx="8" fill="${wallColor}" stroke="#2b2d42" stroke-width="4"/>
-          <!-- Roof -->
           <polygon points="20,86 90,26 160,86" fill="${roofColor}" stroke="#2b2d42" stroke-width="4" stroke-linejoin="round"/>
-          <!-- Door -->
           <rect x="74" y="112" width="32" height="52" rx="14" fill="#bc6c25" stroke="#2b2d42" stroke-width="4"/>
           <circle cx="99" cy="140" r="3.5" fill="#ffd166"/>
-          <!-- Windows -->
           <rect x="44" y="102" width="22" height="22" rx="5" fill="#90e0ef" stroke="#2b2d42" stroke-width="3.5"/>
           <rect x="114" y="102" width="22" height="22" rx="5" fill="#90e0ef" stroke="#2b2d42" stroke-width="3.5"/>
-          <!-- Bamboo Sign for Panda's Home -->
           ${hasBamboo ? `
             <circle cx="90" cy="64" r="16" fill="#ffffff" stroke="#2b2d42" stroke-width="3"/>
             <circle cx="82" cy="54" r="5" fill="#2b2d42"/>
@@ -779,7 +955,6 @@
             <circle cx="90" cy="65" r="11" fill="#ffffff" stroke="#2b2d42" stroke-width="2.5"/>
             <circle cx="86" cy="64" r="2.5" fill="#2b2d42"/>
             <circle cx="94" cy="64" r="2.5" fill="#2b2d42"/>
-            <!-- Bamboo stalks -->
             <rect x="14" y="96" width="8" height="68" rx="3" fill="#52b788" stroke="#2b2d42" stroke-width="3"/>
             <line x1="14" y1="118" x2="22" y2="118" stroke="#2b2d42" stroke-width="3"/>
             <line x1="14" y1="140" x2="22" y2="140" stroke="#2b2d42" stroke-width="3"/>
@@ -787,32 +962,27 @@
           ` : ''}
         </svg>`,
 
-      cloud: (size = 135, label = '') => `
+      cloud: (size = 130, label = '') => `
         <svg width="${size}" height="${size * 0.72}" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg">
           <path d="M46 105 H138 A28 28 0 0 0 142 50 A38 38 0 0 0 70 38 A30 30 0 0 0 46 105 Z"
                 fill="#ffffff" stroke="#4cc9f0" stroke-width="5" stroke-linejoin="round"/>
           ${label ? `<text x="92" y="80" text-anchor="middle" font-size="24" font-weight="bold" fill="#2b2d42">${label}</text>` : ''}
         </svg>`,
 
-      sun: (size = 90) => `
+      sun: (size = 86) => `
         <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
           <circle cx="60" cy="60" r="30" fill="#ffd166" stroke="#f77f00" stroke-width="4"/>
           <g stroke="#f77f00" stroke-width="5" stroke-linecap="round">
-            <line x1="60" y1="10" x2="60" y2="22"/>
-            <line x1="60" y1="98" x2="60" y2="110"/>
-            <line x1="10" y1="60" x2="22" y2="60"/>
-            <line x1="98" y1="60" x2="110" y2="60"/>
-            <line x1="25" y1="25" x2="34" y2="34"/>
-            <line x1="86" y1="86" x2="95" y2="95"/>
-            <line x1="95" y1="25" x2="86" y2="34"/>
-            <line x1="34" y1="86" x2="25" y2="95"/>
+            <line x1="60" y1="10" x2="60" y2="22"/><line x1="60" y1="98" x2="60" y2="110"/>
+            <line x1="10" y1="60" x2="22" y2="60"/><line x1="98" y1="60" x2="110" y2="60"/>
+            <line x1="25" y1="25" x2="34" y2="34"/><line x1="86" y1="86" x2="95" y2="95"/>
+            <line x1="95" y1="25" x2="86" y2="34"/><line x1="34" y1="86" x2="25" y2="95"/>
           </g>
-          <circle cx="51" cy="56" r="3" fill="#2b2d42"/>
-          <circle cx="69" cy="56" r="3" fill="#2b2d42"/>
+          <circle cx="51" cy="56" r="3" fill="#2b2d42"/><circle cx="69" cy="56" r="3" fill="#2b2d42"/>
           <path d="M52 67 Q60 75 68 67" stroke="#2b2d42" stroke-width="3" fill="none" stroke-linecap="round"/>
         </svg>`,
 
-      rainbow: (size = 240) => `
+      rainbow: (size = 230) => `
         <svg width="${size}" height="${size * 0.6}" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
           <path d="M30 160 A120 120 0 0 1 270 160" fill="none" stroke="#ff595e" stroke-width="14" stroke-linecap="round"/>
           <path d="M44 160 A106 106 0 0 1 256 160" fill="none" stroke="#ff924c" stroke-width="14" stroke-linecap="round"/>
@@ -820,41 +990,256 @@
           <path d="M72 160 A78 78 0 0 1 228 160" fill="none" stroke="#8ac926" stroke-width="14" stroke-linecap="round"/>
           <path d="M86 160 A64 64 0 0 1 214 160" fill="none" stroke="#1982c4" stroke-width="14" stroke-linecap="round"/>
           <path d="M100 160 A50 50 0 0 1 200 160" fill="none" stroke="#6a4c93" stroke-width="14" stroke-linecap="round"/>
-          <!-- Fluffy Clouds at Ends -->
-          <circle cx="34" cy="158" r="20" fill="#ffffff"/>
-          <circle cx="54" cy="162" r="16" fill="#ffffff"/>
-          <circle cx="266" cy="158" r="20" fill="#ffffff"/>
-          <circle cx="246" cy="162" r="16" fill="#ffffff"/>
+          <circle cx="34" cy="158" r="20" fill="#ffffff"/><circle cx="54" cy="162" r="16" fill="#ffffff"/>
+          <circle cx="266" cy="158" r="20" fill="#ffffff"/><circle cx="246" cy="162" r="16" fill="#ffffff"/>
         </svg>`,
 
-      trophy: (size = 150) => `
+      trophy: (size = 145, isDiamond = false) => `
         <svg width="${size}" height="${size}" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-          <!-- Handles -->
-          <path d="M52 46 C22 46, 22 92, 56 92" fill="none" stroke="#ffb703" stroke-width="10" stroke-linecap="round"/>
-          <path d="M128 46 C158 46, 158 92, 124 92" fill="none" stroke="#ffb703" stroke-width="10" stroke-linecap="round"/>
-          <!-- Cup -->
-          <path d="M48 34 H132 L122 96 C118 116, 62 116, 58 96 Z" fill="#ffd166" stroke="#e08200" stroke-width="4"/>
-          <!-- Stem & Base -->
-          <rect x="80" y="110" width="20" height="28" fill="#ffb703" stroke="#e08200" stroke-width="3"/>
+          <path d="M52 46 C22 46, 22 92, 56 92" fill="none" stroke="${isDiamond ? '#4cc9f0' : '#ffb703'}" stroke-width="10" stroke-linecap="round"/>
+          <path d="M128 46 C158 46, 158 92, 124 92" fill="none" stroke="${isDiamond ? '#4cc9f0' : '#ffb703'}" stroke-width="10" stroke-linecap="round"/>
+          <path d="M48 34 H132 L122 96 C118 116, 62 116, 58 96 Z" fill="${isDiamond ? '#90e0ef' : '#ffd166'}" stroke="${isDiamond ? '#0077b6' : '#e08200'}" stroke-width="4"/>
+          <rect x="80" y="110" width="20" height="28" fill="${isDiamond ? '#48cae4' : '#ffb703'}" stroke="${isDiamond ? '#0077b6' : '#e08200'}" stroke-width="3"/>
           <rect x="54" y="138" width="72" height="18" rx="6" fill="#2b2d42"/>
-          <rect x="64" y="142" width="52" height="10" rx="3" fill="#ffd166"/>
-          <!-- Panda Emblem on Cup -->
+          <rect x="64" y="142" width="52" height="10" rx="3" fill="${isDiamond ? '#90e0ef' : '#ffd166'}"/>
           <circle cx="77" cy="60" r="6" fill="#2b2d42"/>
           <circle cx="103" cy="60" r="6" fill="#2b2d42"/>
           <circle cx="90" cy="72" r="16" fill="#ffffff" stroke="#2b2d42" stroke-width="2.5"/>
           <circle cx="84" cy="70" r="3.5" fill="#2b2d42"/>
           <circle cx="96" cy="70" r="3.5" fill="#2b2d42"/>
           <ellipse cx="90" cy="76" rx="3" ry="2" fill="#2b2d42"/>
-          <!-- Sparkles -->
-          <polygon points="30,22 33,30 41,33 33,36 30,44 27,36 19,33 27,30" fill="#ff9f1c"/>
-          <polygon points="150,20 153,28 161,31 153,34 150,42 147,34 139,31 147,28" fill="#ff9f1c"/>
+          <polygon points="30,22 33,30 41,33 33,36 30,44 27,36 19,33 27,30" fill="${isDiamond ? '#4cc9f0' : '#ff9f1c'}"/>
+          <polygon points="150,20 153,28 161,31 153,34 150,42 147,34 139,31 147,28" fill="${isDiamond ? '#4cc9f0' : '#ff9f1c'}"/>
+        </svg>`,
+
+      stickerPack: (size = 175) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer Holographic Sticker Backing -->
+          <rect x="20" y="20" width="180" height="160" rx="28" fill="#ffffff" stroke="#ff6b6b" stroke-width="6" stroke-dasharray="10 6"/>
+          <!-- Rainbow Ribbon -->
+          <path d="M40 70 A70 60 0 0 1 180 70" fill="none" stroke="#ff595e" stroke-width="9" stroke-linecap="round"/>
+          <path d="M50 70 A60 50 0 0 1 170 70" fill="none" stroke="#ffca3a" stroke-width="9" stroke-linecap="round"/>
+          <path d="M60 70 A50 40 0 0 1 160 70" fill="none" stroke="#8ac926" stroke-width="9" stroke-linecap="round"/>
+          <path d="M70 70 A40 30 0 0 1 150 70" fill="none" stroke="#1982c4" stroke-width="9" stroke-linecap="round"/>
+          <!-- Cute Panda Face Sticker -->
+          <circle cx="82" cy="76" r="14" fill="#2b2d42"/>
+          <circle cx="138" cy="76" r="14" fill="#2b2d42"/>
+          <ellipse cx="110" cy="105" rx="38" ry="32" fill="#ffffff" stroke="#2b2d42" stroke-width="4"/>
+          <ellipse cx="94" cy="102" rx="11" ry="13" transform="rotate(-15 94 102)" fill="#2b2d42"/>
+          <ellipse cx="126" cy="102" rx="11" ry="13" transform="rotate(15 126 102)" fill="#2b2d42"/>
+          <path d="M88 102 Q94 94 100 102" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M120 102 Q126 94 132 102" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="110" cy="112" rx="6" ry="4" fill="#2b2d42"/>
+          <path d="M100 119 Q110 131 120 119 Z" fill="#ff6b6b" stroke="#2b2d42" stroke-width="2.5"/>
+          <!-- Gold Star Badges -->
+          <polygon points="48,132 53,142 64,144 56,152 58,163 48,158 38,163 40,152 32,144 43,142" fill="#ffd166" stroke="#e08200" stroke-width="2"/>
+          <polygon points="172,132 177,142 188,144 180,152 182,163 172,158 162,163 164,152 156,144 167,142" fill="#ffd166" stroke="#e08200" stroke-width="2"/>
+          <!-- Banner Text -->
+          <rect x="66" y="142" width="88" height="24" rx="12" fill="#7209b7"/>
+          <text x="110" y="158" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">SUPER STAR!</text>
+        </svg>`,
+
+      // --- DICTIONARY ILLUSTRATIONS (100% Offline SVG) ---
+      toy: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="34" cy="34" r="14" fill="#d4a373" stroke="#2b2d42" stroke-width="4"/>
+          <circle cx="86" cy="34" r="14" fill="#d4a373" stroke="#2b2d42" stroke-width="4"/>
+          <circle cx="60" cy="64" r="36" fill="#e6ccb2" stroke="#2b2d42" stroke-width="4"/>
+          <ellipse cx="60" cy="72" rx="16" ry="12" fill="#fff3b0"/>
+          <circle cx="48" cy="56" r="4.5" fill="#2b2d42"/><circle cx="72" cy="56" r="4.5" fill="#2b2d42"/>
+          <ellipse cx="60" cy="67" rx="5" ry="3.5" fill="#2b2d42"/>
+          <path d="M53 75 Q60 81 67 75" stroke="#2b2d42" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>`,
+
+      glasses: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="35" cy="64" r="20" fill="#caf0f8" stroke="#2b2d42" stroke-width="5"/>
+          <circle cx="85" cy="64" r="20" fill="#caf0f8" stroke="#2b2d42" stroke-width="5"/>
+          <path d="M55 62 Q60 56 65 62" stroke="#2b2d42" stroke-width="5" fill="none"/>
+          <line x1="10" y1="60" x2="15" y2="60" stroke="#2b2d42" stroke-width="5" stroke-linecap="round"/>
+          <line x1="105" y1="60" x2="110" y2="60" stroke="#2b2d42" stroke-width="5" stroke-linecap="round"/>
+        </svg>`,
+
+      homework: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="26" y="18" width="68" height="84" rx="10" fill="#ffffff" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="26" y="18" width="68" height="18" rx="6" fill="#ff9f1c" stroke="#2b2d42" stroke-width="4"/>
+          <line x1="38" y1="50" x2="82" y2="50" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+          <line x1="38" y1="66" x2="76" y2="66" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+          <path d="M42 84 L52 92 L72 74" stroke="#2ec4b6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`,
+
+      computer: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="22" width="84" height="56" rx="8" fill="#4cc9f0" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="26" y="30" width="68" height="40" rx="4" fill="#e0fbfc"/>
+          <rect x="50" y="78" width="20" height="14" fill="#8d99ae" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="36" y="92" width="48" height="8" rx="4" fill="#2b2d42"/>
+        </svg>`,
+
+      watch: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="46" y="10" width="28" height="100" rx="8" fill="#4361ee" stroke="#2b2d42" stroke-width="4"/>
+          <circle cx="60" cy="60" r="26" fill="#ffffff" stroke="#2b2d42" stroke-width="4"/>
+          <line x1="60" y1="60" x2="60" y2="44" stroke="#e63946" stroke-width="4" stroke-linecap="round"/>
+          <line x1="60" y1="60" x2="72" y2="60" stroke="#2b2d42" stroke-width="4" stroke-linecap="round"/>
+        </svg>`,
+
+      phone: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="36" y="14" width="48" height="92" rx="12" fill="#2b2d42"/>
+          <rect x="42" y="24" width="36" height="68" rx="6" fill="#90e0ef"/>
+          <circle cx="60" cy="99" r="3.5" fill="#ffffff"/>
+        </svg>`,
+
+      gift: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="24" y="46" width="72" height="56" rx="8" fill="#ff6b6b" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="20" y="34" width="80" height="16" rx="6" fill="#ff8fa3" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="53" y="34" width="14" height="68" fill="#ffd166" stroke="#2b2d42" stroke-width="3"/>
+          <path d="M60 34 C42 14, 28 28, 48 34" fill="#ffd166" stroke="#2b2d42" stroke-width="3"/>
+          <path d="M60 34 C78 14, 92 28, 72 34" fill="#ffd166" stroke="#2b2d42" stroke-width="3"/>
+        </svg>`,
+
+      chess: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="22" y="22" width="76" height="76" rx="10" fill="#fff3b0" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="22" y="22" width="38" height="38" fill="#f4a261"/>
+          <rect x="60" y="60" width="38" height="38" fill="#f4a261"/>
+          <circle cx="41" cy="41" r="11" fill="#2b2d42"/>
+          <circle cx="79" cy="79" r="11" fill="#ffffff" stroke="#2b2d42" stroke-width="3"/>
+        </svg>`,
+
+      rose: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="54" x2="60" y2="104" stroke="#2d6a4f" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="46" cy="78" rx="12" ry="6" transform="rotate(-25 46 78)" fill="#52b788" stroke="#2b2d42" stroke-width="2.5"/>
+          <ellipse cx="74" cy="72" rx="12" ry="6" transform="rotate(25 74 72)" fill="#52b788" stroke="#2b2d42" stroke-width="2.5"/>
+          <circle cx="60" cy="40" r="22" fill="#e63946" stroke="#2b2d42" stroke-width="4"/>
+          <path d="M50 38 Q60 26 70 38 Q65 48 55 44" fill="none" stroke="#ffccd5" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>`,
+
+      toothbrush: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(60,60) rotate(-35) translate(-60,-60)">
+            <rect x="16" y="56" width="88" height="14" rx="7" fill="#2ec4b6" stroke="#2b2d42" stroke-width="4"/>
+            <rect x="74" y="38" width="26" height="18" rx="4" fill="#ffffff" stroke="#2b2d42" stroke-width="3.5"/>
+            <line x1="82" y1="38" x2="82" y2="56" stroke="#90e0ef" stroke-width="3"/>
+            <line x1="91" y1="38" x2="91" y2="56" stroke="#90e0ef" stroke-width="3"/>
+          </g>
+        </svg>`,
+
+      friend: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="42" cy="44" r="18" fill="#ffd166" stroke="#2b2d42" stroke-width="3.5"/>
+          <path d="M20 96 C20 72, 64 72, 64 96" fill="#4cc9f0" stroke="#2b2d42" stroke-width="3.5"/>
+          <circle cx="78" cy="44" r="18" fill="#ffccd5" stroke="#2b2d42" stroke-width="3.5"/>
+          <path d="M56 96 C56 72, 100 72, 100 96" fill="#ff758f" stroke="#2b2d42" stroke-width="3.5"/>
+          <path d="M55 24 Q60 16 65 24 Q60 32 55 24" fill="#ff595e"/>
+        </svg>`,
+
+      school: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="22" y="48" width="76" height="54" rx="6" fill="#ffd166" stroke="#2b2d42" stroke-width="4"/>
+          <polygon points="16,50 60,22 104,50" fill="#e63946" stroke="#2b2d42" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="60" cy="40" r="8" fill="#ffffff" stroke="#2b2d42" stroke-width="2.5"/>
+          <rect x="50" y="72" width="20" height="30" rx="4" fill="#8d5524" stroke="#2b2d42" stroke-width="3"/>
+          <line x1="60" y1="10" x2="60" y2="22" stroke="#2b2d42" stroke-width="3"/>
+          <polygon points="60,10 76,14 60,18" fill="#2ec4b6"/>
+        </svg>`,
+
+      run: (size = 64) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="68" cy="26" r="12" fill="#ffd166" stroke="#2b2d42" stroke-width="4"/>
+          <path d="M62 40 L52 66 L32 76 M52 66 L74 80 L68 102" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M40 48 L60 44 L80 54" stroke="#ff6b6b" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="16" y1="56" x2="32" y2="56" stroke="#4cc9f0" stroke-width="4" stroke-linecap="round"/>
+          <line x1="12" y1="68" x2="26" y2="68" stroke="#4cc9f0" stroke-width="4" stroke-linecap="round"/>
         </svg>`
     };
 
     /* ==========================================================================
-       3. CURRICULUM DATA (Lessons 4, 5, 6 Vocabulary & Key Sentences)
+       3. TEXTBOOK CURRICULUM DATA & PICTURE DICTIONARY
        ========================================================================== */
-    // Helper to render Hanzi with Ruby Pinyin above each character
+    const DICTIONARY_WORDS = [
+      { zh: [['玩','wán'],['具','jù']], pinyin: 'wán jù', en: 'toy', art: 'toy' },
+      { zh: [['眼','yǎn'],['镜','jìng']], pinyin: 'yǎn jìng', en: 'eyeglasses', art: 'glasses' },
+      { zh: [['作','zuò'],['业','yè']], pinyin: 'zuò yè', en: 'homework', art: 'homework' },
+      { zh: [['电','diàn'],['脑','nǎo']], pinyin: 'diàn nǎo', en: 'computer', art: 'computer' },
+      { zh: [['手','shǒu'],['表','biǎo']], pinyin: 'shǒu biǎo', en: 'watch', art: 'watch' },
+      { zh: [['手','shǒu'],['机','jī']], pinyin: 'shǒu jī', en: 'cellphone', art: 'phone' },
+      { zh: [['礼','lǐ'],['物','wù']], pinyin: 'lǐ wù', en: 'gift / present', art: 'gift' },
+      { zh: [['下','xià'],['棋','qí']], pinyin: 'xià qí', en: 'to play chess', art: 'chess' },
+      { zh: [['玫','méi'],['瑰','guī'],['花','huā']], pinyin: 'méi guī huā', en: 'rose', art: 'rose' },
+      { zh: [['牙','yá'],['刷','shuā']], pinyin: 'yá shuā', en: 'toothbrush', art: 'toothbrush' },
+      { zh: [['朋','péng'],['友','you']], pinyin: 'péng you', en: 'friend', art: 'friend' },
+      { zh: [['学','xué'],['校','xiào']], pinyin: 'xué xiào', en: 'school', art: 'school' },
+      { zh: [['跑','pǎo'],['步','bù']], pinyin: 'pǎo bù', en: 'to run / jogging', art: 'run' }
+    ];
+
+    function openDictModal() {
+      sfxClick();
+      const input = document.getElementById('dictSearchInput');
+      if (input) input.value = '';
+      renderDictItems('');
+      document.getElementById('dictModal').classList.add('open');
+    }
+
+    function closeDictModal() {
+      sfxClick();
+      document.getElementById('dictModal').classList.remove('open');
+    }
+
+    function renderDictItems(query) {
+      const q = (query || '').trim().toLowerCase();
+      const grid = document.getElementById('dictGrid');
+      if (!grid) return;
+
+      const filtered = DICTIONARY_WORDS.filter(item => {
+        const hanziStr = item.zh.map(p => p[0]).join('');
+        return !q ||
+          hanziStr.includes(q) ||
+          item.pinyin.toLowerCase().includes(q) ||
+          item.en.toLowerCase().includes(q);
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px; color:#5c6378; font-weight:700;">No matching words found. Try another search!</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="dict-item">
+          <div style="margin-bottom:4px;">${SVG_ART[item.art] ? SVG_ART[item.art](64) : ''}</div>
+          <div>${renderZh(item.zh, 'zh-small')}</div>
+          <div class="dict-en">${item.en}</div>
+        </div>
+      `).join('');
+    }
+
+    const VOCAB_BANK = {
+      // Lesson 4 Vocabulary (Page 46)
+      meiyou:  { zh: [['没','méi'],['有','yǒu']], en: 'don’t have' },
+      qianbi:  { zh: [['铅','qiān'],['笔','bǐ']], en: 'pencil' },
+      keyi:    { zh: [['可','kě'],['以','yǐ']], en: 'can, may' },
+      jie:     { zh: [['借','jiè']], en: 'to borrow' },
+      zhi:     { zh: [['支','zhī']], en: 'measure word (for long, thin objects)' },
+
+      // Lesson 5 Vocabulary (Page 61)
+      na:      { zh: [['那','nà']], en: 'that' },
+      jia:     { zh: [['家','jiā']], en: 'house; home' },
+      ma:      { zh: [['吗','ma']], en: 'question mark particle' },
+      dui:     { zh: [['对','duì']], en: 'yes; correct' },
+
+      // Lesson 6 Vocabulary (Page 73)
+      kan:     { zh: [['看','kàn']], en: 'to look (at); to watch' },
+      caihong: { zh: [['彩','cǎi'],['虹','hóng']], en: 'rainbow' },
+      kandao:  { zh: [['看','kàn'],['到','dào']], en: 'to see' },
+      zainali: { zh: [['在','zài'],['哪','nǎ'],['里','lǐ']], en: 'where' },
+      shenme:  { zh: [['什','shén'],['么','me'],['也','yě'],['没','méi']], en: 'nothing; not... anything' }
+    };
+
+    // Helper function to render Hanzi characters with Ruby Pinyin above each character
     function renderZh(wordPairs, sizeClass = '') {
       const html = wordPairs.map(([hanzi, pinyin]) => `
         <span class="zh-word">
@@ -865,243 +1250,689 @@
       return `<span class="zh-phrase ${sizeClass}">${html}</span>`;
     }
 
-    // Complete G2 Vocabulary Bank across Lessons 4, 5, and 6
-    const VOCAB_BANK = {
-      // Lesson 4: School Supplies & Borrowing
-      qianbi:   { zh: [['铅','qiān'],['笔','bǐ']], en: 'pencil', art: 'pencil' },
-      shubao:   { zh: [['书','shū'],['包','bāo']], en: 'schoolbag', art: 'schoolbag' },
-      shu:      { zh: [['书','shū']], en: 'book', art: 'book' },
-      xiangpi:  { zh: [['橡','xiàng'],['皮','pí']], en: 'eraser', art: 'eraser' },
-      chizi:    { zh: [['尺','chǐ'],['子','zi']], en: 'ruler', art: 'ruler' },
-      meiyou:   { zh: [['没','méi'],['有','yǒu']], en: 'do not have', art: null },
-      jie:      { zh: [['借','jiè']], en: 'borrow / lend', art: null },
-      keyi:     { zh: [['可','kě'],['以','yǐ']], en: 'can / may', art: null },
-
-      // Lesson 5: Home & Locations
-      jia:      { zh: [['家','jiā']], en: 'home / family', art: 'house' },
-      na:       { zh: [['那','nà']], en: 'that', art: null },
-      zhe:      { zh: [['这','zhè']], en: 'this', art: null },
-      shi:      { zh: [['是','shì']], en: 'is / am / are', art: null },
-      dui:      { zh: [['对','duì']], en: 'right / correct', art: null },
-      wode:     { zh: [['我','wǒ'],['的','de']], en: 'my / mine', art: null },
-      nide:     { zh: [['你','nǐ'],['的','de']], en: 'your / yours', art: null },
-
-      // Lesson 6: Rainbow, Sky & Looking
-      caihong:  { zh: [['彩','cǎi'],['虹','hóng']], en: 'rainbow', art: 'rainbow' },
-      kan:      { zh: [['看','kàn']], en: 'look / see', art: null },
-      nali:     { zh: [['哪','nǎ'],['里','lǐ']], en: 'where', art: null },
-      yun:      { zh: [['云','yún']], en: 'cloud', art: 'cloud' },
-      taiyang:  { zh: [['太','tài'],['阳','yáng']], en: 'sun', art: 'sun' },
-      kandao:   { zh: [['看','kàn'],['到','dào']], en: 'see / saw', art: null },
-      shenme:   { zh: [['什','shén'],['么','me']], en: 'what', art: null }
-    };
-
     /* ==========================================================================
-       4. STRUCTURED GAME STEPS (All 3 Chapters + Interactive Tasks)
+       4. MULTI-ADVENTURE STEP BANK (Adventure 1, Adventure 2, Adventure 3)
+          Every question in Adventure 2 & 3 comes from unused textbook drills!
        ========================================================================== */
-    const GAME_STEPS = [
-      // ===================== LESSON 4: PANDA'S PENCIL =====================
-      {
-        chapter: 1,
-        type: 'scene-drag-pencil',
-        instruction: 'Step 1: Read Little Panda’s words, then drag (or click) the pencil to help Little Panda!',
-        dialogueSpeaker: 'Little Panda',
-        dialogueZh: [['我','wǒ'],['没','méi'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']],
-        replySpeaker: 'Little Rabbit',
-        replyZh: [['你','nǐ'],['可','kě'],['以','yǐ'],['借','jiè'],['一','yī'],['支','zhī'],['我','wǒ'],['的','de'],['。','']]
-      },
-      {
-        chapter: 1,
-        type: 'vocab-en-to-zh',
-        instruction: 'Step 2: Choose the Chinese word for the English meaning.',
-        promptEn: 'schoolbag',
-        options: ['shubao', 'qianbi', 'xiangpi'],
-        answer: 'shubao'
-      },
-      {
-        chapter: 1,
-        type: 'vocab-zh-to-en',
-        instruction: 'Step 3: What does this Chinese word mean?',
-        promptZh: 'xiangpi',
-        options: ['eraser', 'ruler', 'pencil'],
-        answer: 'eraser'
-      },
-      {
-        chapter: 1,
-        type: 'vocab-en-to-zh',
-        instruction: 'Step 4: Which Chinese word means “borrow / lend”?',
-        promptEn: 'borrow / lend',
-        options: ['jie', 'meiyou', 'shu'],
-        answer: 'jie'
-      },
-      {
-        chapter: 1,
-        type: 'match-pairs',
-        instruction: 'Step 5: Click a Chinese card, then click its matching English meaning!',
-        pairs: ['qianbi', 'shu', 'chizi', 'meiyou']
-      },
-      {
-        chapter: 1,
-        type: 'sentence-meaning',
-        instruction: 'Step 6: Sentence Challenge! What does Little Panda say?',
-        sentenceZh: [['我','wǒ'],['没','méi'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']],
-        options: [
-          { text: 'I do not have a pencil.', correct: true },
-          { text: 'I have a big schoolbag.', correct: false },
-          { text: 'Where is my book?', correct: false }
-        ]
-      },
-      {
-        chapter: 1,
-        type: 'sentence-meaning',
-        instruction: 'Step 7: Sentence Challenge! What does Little Rabbit say?',
-        sentenceZh: [['你','nǐ'],['可','kě'],['以','yǐ'],['借','jiè'],['一','yī'],['支','zhī'],['我','wǒ'],['的','de'],['。','']],
-        options: [
-          { text: 'You can borrow one of mine.', correct: true },
-          { text: 'Look at the rainbow!', correct: false },
-          { text: 'Is that your home?', correct: false }
-        ],
-        chapterComplete: true
-      },
+    const ADVENTURES = {
+      // ===================== ADVENTURE 1 (GOLDEN PANDA TROPHY) =====================
+      1: [
+        // LESSON 4
+        {
+          chapter: 1,
+          type: 'scene-drag-pencil',
+          skill: 'Lesson 4 • Dialogue & Vocabulary',
+          instruction: 'Read the dialogue, then drag (or tap) the pencil (铅笔) to help Little Panda!',
+          dialogueZh: [['我','wǒ'],['没','méi'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']],
+          replyZh: [['你','nǐ'],['可','kě'],['以','yǐ'],['借','jiè'],['一','yī'],['支','zhī'],['我','wǒ'],['的','de'],['。','']]
+        },
+        {
+          chapter: 1,
+          type: 'vocab-en-to-zh',
+          skill: 'Lesson 4 • Vocabulary',
+          instruction: 'Choose the Chinese word for the English meaning.',
+          promptEn: 'can, may',
+          options: ['keyi', 'meiyou', 'jie'],
+          answer: 'keyi',
+          explainAnswerHtml: renderZh([['可','kě'],['以','yǐ']]),
+          explainText: 'In Lesson 4, <b>可以 (kě yǐ)</b> means “can” or “may” (used to ask or give permission). <b>没有 (méi yǒu)</b> means “don’t have” and <b>借 (jiè)</b> means “to borrow”.'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-blank',
+          skill: 'Lesson 4 • Grammar: Measure Word 支',
+          instruction: 'Fill in the blank with the right word from Lesson 4!',
+          sentenceParts: [
+            { zh: [['我','wǒ'],['有','yǒu'],['五','wǔ']] },
+            { blank: true },
+            { zh: [['铅','qiān'],['笔','bǐ'],['。','']] }
+          ],
+          options: [
+            { id: 'zhi', zh: [['支','zhī']], correct: true },
+            { id: 'jie', zh: [['借','jiè']], correct: false },
+            { id: 'ma', zh: [['吗','ma']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['支','zhī']]),
+          explainText: 'In Chinese, we use <b>number + measure word + noun</b>. <b>支 (zhī)</b> is the measure word for long, thin objects like pencils: <b>五支铅笔</b> (five pencils).'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-position',
+          skill: 'Lesson 4 • Grammar: Placement of 可以',
+          instruction: 'Where should “可以 (kě yǐ)” go in this sentence?',
+          targetWord: [['可','kě'],['以','yǐ']],
+          sentenceSlots: [
+            { zh: [['你','nǐ']] },
+            { slot: 'A' },
+            { zh: [['借','jiè']] },
+            { slot: 'B' },
+            { zh: [['铅','qiān'],['笔','bǐ'],['。','']] }
+          ],
+          correctSlot: 'A',
+          explainAnswerHtml: `Position A: ${renderZh([['你','nǐ'],['可','kě'],['以','yǐ'],['借','jiè'],['铅','qiān'],['笔','bǐ'],['。','']])}`,
+          explainText: '<b>可以 (can/may)</b> is placed <b>before the action verb</b> (借 borrow): <b>你可以借铅笔</b> (You can borrow a pencil).'
+        },
+        {
+          chapter: 1,
+          type: 'dialogue-qa',
+          skill: 'Lesson 4 • Dialogue Q&A',
+          instruction: 'Read Little Rabbit’s question and choose the best Chinese reply!',
+          questionZh: [['你','nǐ'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['吗','ma'],['？','']],
+          options: [
+            { zh: [['对','duì'],['，',''],['我','wǒ'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']], correct: true },
+            { zh: [['你','nǐ'],['没','méi'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']], correct: false },
+            { zh: [['在','zài'],['哪','nǎ'],['里','lǐ'],['？','']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['对','duì'],['，',''],['我','wǒ'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']]),
+          explainText: 'When someone asks <b>你有铅笔吗？</b> (Do you have a pencil?), you reply about yourself using <b>我 (I)</b>: <b>对，我有铅笔。</b> (Yes, I have a pencil.)'
+        },
 
-      // ===================== LESSON 5: FIND PANDA'S HOME =====================
-      {
-        chapter: 2,
-        type: 'vocab-zh-to-en',
-        instruction: 'Step 1: Let’s help Little Panda go home! What does this word mean?',
-        promptZh: 'jia',
-        options: ['home / family', 'schoolbag', 'cloud'],
-        answer: 'home / family'
-      },
-      {
-        chapter: 2,
-        type: 'vocab-en-to-zh',
-        instruction: 'Step 2: Choose the Chinese word for “that”.',
-        promptEn: 'that',
-        options: ['na', 'zhe', 'dui'],
-        answer: 'na'
-      },
-      {
-        chapter: 2,
-        type: 'match-pairs',
-        instruction: 'Step 3: Match the Lesson 5 Chinese words with their English meanings!',
-        pairs: ['dui', 'wode', 'nide', 'shi']
-      },
-      {
-        chapter: 2,
-        type: 'sentence-meaning',
-        instruction: 'Step 4: Little Rabbit asks a question. What does it mean?',
-        sentenceZh: [['那','nà'],['是','shì'],['你','nǐ'],['家','jiā'],['吗','ma'],['？','']],
-        options: [
-          { text: 'Is that your home?', correct: true },
-          { text: 'I do not have a pencil.', correct: false },
-          { text: 'I see nothing at all.', correct: false }
-        ]
-      },
-      {
-        chapter: 2,
-        type: 'sentence-meaning',
-        instruction: 'Step 5: Little Panda answers! What does it mean?',
-        sentenceZh: [['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']],
-        options: [
-          { text: 'Yes (right), that is my home.', correct: true },
-          { text: 'Where is the sun?', correct: false },
-          { text: 'You can borrow my ruler.', correct: false }
-        ]
-      },
-      {
-        chapter: 2,
-        type: 'scene-find-home',
-        instruction: 'Step 6: Read the clue and click Little Panda’s house!',
-        clueZh: [['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']],
-        clueHint: 'Clue: Little Panda loves bamboo and has a panda sign on the roof!',
-        chapterComplete: true
-      },
+        // LESSON 5
+        {
+          chapter: 2,
+          type: 'vocab-zh-to-en',
+          skill: 'Lesson 5 • Vocabulary',
+          instruction: 'What does this Lesson 5 word mean?',
+          promptZh: 'na',
+          options: ['that', 'yes; correct', 'rainbow'],
+          answer: 'that',
+          explainAnswerHtml: 'that',
+          explainText: '<b>那 (nà)</b> means “that” — we use it to point to something far away from us, like <b>那是我的学校</b> (That is my school).'
+        },
+        {
+          chapter: 2,
+          type: 'grammar-position',
+          skill: 'Lesson 5 • Grammar: Placement of 那',
+          instruction: 'Where should “那 (nà)” go to mean “That is my home”?',
+          targetWord: [['那','nà']],
+          sentenceSlots: [
+            { slot: 'A' },
+            { zh: [['是','shì']] },
+            { slot: 'B' },
+            { zh: [['我','wǒ'],['家','jiā'],['。','']] }
+          ],
+          correctSlot: 'A',
+          explainAnswerHtml: `Position A: ${renderZh([['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']])}`,
+          explainText: 'We place <b>那 (that)</b> at the beginning before <b>是 (is)</b>: <b>那是我家。</b> (That is my home.)'
+        },
+        {
+          chapter: 2,
+          type: 'grammar-blank',
+          skill: 'Lesson 5 • Grammar: Question Particle 吗',
+          instruction: 'Turn the statement into a yes-no question!',
+          sentenceParts: [
+            { zh: [['那','nà'],['是','shì'],['你','nǐ'],['的','de'],['铅','qiān'],['笔','bǐ']] },
+            { blank: true },
+            { zh: [['？','']] }
+          ],
+          options: [
+            { id: 'ma', zh: [['吗','ma']], correct: true },
+            { id: 'dui', zh: [['对','duì']], correct: false },
+            { id: 'zhi', zh: [['支','zhī']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['吗','ma']]),
+          explainText: 'In Chinese, we put <b>吗 (ma)</b> at the <b>end</b> of a sentence to turn a statement into a yes-no question: <b>那是你的铅笔吗？</b> (Is that your pencil?)'
+        },
+        {
+          chapter: 2,
+          type: 'dialogue-qa',
+          skill: 'Lesson 5 • Dialogue Q&A',
+          instruction: 'Little Panda asks you a question. Pick the right Chinese answer!',
+          questionZh: [['那','nà'],['是','shì'],['你','nǐ'],['的','de'],['朋','péng'],['友','you'],['吗','ma'],['？','']],
+          options: [
+            { zh: [['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['的','de'],['朋','péng'],['友','you'],['。','']], correct: true },
+            { zh: [['是','shì'],['吗','ma'],['？','']], correct: false },
+            { zh: [['看','kàn'],['彩','cǎi'],['虹','hóng'],['！','']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['的','de'],['朋','péng'],['友','you'],['。','']]),
+          explainText: 'To answer <b>那是你的朋友吗？</b> (Is that your friend?), we say <b>对，那是我的朋友。</b> (Yes, that is my friend.)'
+        },
+        {
+          chapter: 2,
+          type: 'scene-find-home',
+          skill: 'Lesson 5 • Reading & Scene',
+          instruction: 'Help Little Panda find home! Read the dialogue and click Panda’s house!',
+          clueZh: [['那','nà'],['是','shì'],['你','nǐ'],['家','jiā'],['吗','ma'],['？',''],['→',''],['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']],
+          clueHint: 'Clue: Look for the house with bamboo and a panda face on the roof!'
+        },
 
-      // ===================== LESSON 6: FIND THE RAINBOW =====================
-      {
-        chapter: 3,
-        type: 'vocab-en-to-zh',
-        instruction: 'Step 1: Look up at the sky! Choose the Chinese word for “rainbow”.',
-        promptEn: 'rainbow',
-        options: ['caihong', 'taiyang', 'yun'],
-        answer: 'caihong'
-      },
-      {
-        chapter: 3,
-        type: 'vocab-zh-to-en',
-        instruction: 'Step 2: What does this Chinese word mean?',
-        promptZh: 'nali',
-        options: ['where', 'what', 'eraser'],
-        answer: 'where'
-      },
-      {
-        chapter: 3,
-        type: 'match-pairs',
-        instruction: 'Step 3: Match all the sky & looking words!',
-        pairs: ['kan', 'yun', 'taiyang', 'shenme']
-      },
-      {
-        chapter: 3,
-        type: 'sentence-meaning',
-        instruction: 'Step 4: Little Rabbit shouts excitedly! What does this mean?',
-        sentenceZh: [['看','kàn'],['彩','cǎi'],['虹','hóng'],['！','']],
-        options: [
-          { text: 'Look at the rainbow!', correct: true },
-          { text: 'Is that your home?', correct: false },
-          { text: 'I do not have a book.', correct: false }
-        ]
-      },
-      {
-        chapter: 3,
-        type: 'sentence-meaning',
-        instruction: 'Step 5: Little Panda looks around and says this. What does it mean?',
-        sentenceZh: [['在','zài'],['哪','nǎ'],['里','lǐ'],['？',''],['我','wǒ'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['看','kàn'],['到','dào'],['。','']],
-        options: [
-          { text: 'Where? I didn’t see anything.', correct: true },
-          { text: 'Yes, that is my schoolbag.', correct: false },
-          { text: 'You can borrow my pencil.', correct: false }
-        ]
-      },
-      {
-        chapter: 3,
-        type: 'scene-find-rainbow',
-        instruction: 'Step 6: Click the clouds in the sky to help Little Panda find the rainbow!',
-        chapterComplete: true
-      }
-    ];
+        // LESSON 6
+        {
+          chapter: 3,
+          type: 'vocab-en-to-zh',
+          skill: 'Lesson 6 • Vocabulary',
+          instruction: 'Choose the Chinese word for “to look (at); to watch”.',
+          promptEn: 'to look (at); to watch',
+          options: ['kan', 'caihong', 'jia'],
+          answer: 'kan',
+          explainAnswerHtml: renderZh([['看','kàn']]),
+          explainText: '<b>看 (kàn)</b> means “to look (at)” or “to watch”, such as <b>看彩虹</b> (look at the rainbow) or <b>看电视</b> (watch TV).'
+        },
+        {
+          chapter: 3,
+          type: 'grammar-blank',
+          skill: 'Lesson 6 • Grammar: 什么也没 + Verb',
+          instruction: 'Look at the empty yellow schoolbag! Complete the sentence.',
+          sentenceParts: [
+            { zh: [['书','shū'],['包','bāo'],['里','lǐ'],['面','miàn']] },
+            { blank: true },
+            { zh: [['有','yǒu'],['。','']] }
+          ],
+          options: [
+            { id: 'shenme', zh: [['什','shén'],['么','me'],['也','yě'],['没','méi']], correct: true },
+            { id: 'keyi', zh: [['可','kě'],['以','yǐ']], correct: false },
+            { id: 'zainali', zh: [['在','zài'],['哪','nǎ'],['里','lǐ']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['什','shén'],['么','me'],['也','yě'],['没','méi']]),
+          explainText: '<b>什么也没 + verb</b> means “nothing / not... anything”. <b>书包里面什么也没有</b> means “There is nothing inside the schoolbag.”'
+        },
+        {
+          chapter: 3,
+          type: 'dialogue-qa',
+          skill: 'Lesson 6 • Dialogue Q&A',
+          instruction: 'Little Rabbit says “看彩虹！” (Look at the rainbow!). How does Panda answer?',
+          questionZh: [['看','kàn'],['彩','cǎi'],['虹','hóng'],['！','']],
+          options: [
+            { zh: [['在','zài'],['哪','nǎ'],['里','lǐ'],['？',''],['我','wǒ'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['看','kàn'],['到','dào'],['！','']], correct: true },
+            { zh: [['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']], correct: false },
+            { zh: [['我','wǒ'],['没','méi'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['在','zài'],['哪','nǎ'],['里','lǐ'],['？',''],['我','wǒ'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['看','kàn'],['到','dào'],['！','']]),
+          explainText: 'When Panda cannot see the rainbow yet, Panda asks <b>在哪里？</b> (Where?) and says <b>我什么也没看到！</b> (I don’t see anything!)'
+        },
+        {
+          chapter: 3,
+          type: 'scene-find-rainbow',
+          skill: 'Lesson 6 • Interactive Sky Adventure',
+          instruction: 'Click the clouds in the sky to help Little Panda find the rainbow!'
+        }
+      ],
+
+      // ===================== ADVENTURE 2 (MORE TEXTBOOK EXERCISES -> DIAMOND TROPHY) =====================
+      2: [
+        // LESSON 4 (Textbook p.47-55 unused items)
+        {
+          chapter: 1,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 4: Textbook Exercise',
+          instruction: 'Textbook Challenge! Fill in the blank: “Younger brother has one pencil.”',
+          sentenceParts: [
+            { zh: [['弟','dì'],['弟','di'],['有','yǒu'],['一','yī']] },
+            { blank: true },
+            { zh: [['铅','qiān'],['笔','bǐ'],['。','']] }
+          ],
+          options: [
+            { id: 'zhi', zh: [['支','zhī']], correct: true },
+            { id: 'jie', zh: [['借','jiè']], correct: false },
+            { id: 'meiyou', zh: [['没','méi'],['有','yǒu']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['支','zhī']]),
+          explainText: 'From Lesson 4 p.47: <b>弟弟有一支铅笔。</b> (Younger brother has one pencil.) Always use <b>支 (zhī)</b> between a number and <b>铅笔</b>!'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 4: Textbook Exercise',
+          instruction: 'Textbook Challenge! Fill in the blank: “I go to the library to borrow books.”',
+          sentenceParts: [
+            { zh: [['我','wǒ'],['去','qù'],['图','tú'],['书','shū'],['馆','guǎn']] },
+            { blank: true },
+            { zh: [['书','shū'],['。','']] }
+          ],
+          options: [
+            { id: 'jie', zh: [['借','jiè']], correct: true },
+            { id: 'zhi', zh: [['支','zhī']], correct: false },
+            { id: 'na', zh: [['那','nà']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['借','jiè']]),
+          explainText: 'From Lesson 4 p.48: <b>我去图书馆借书。</b> (I go to the library to borrow books.) <b>借 (jiè)</b> means “to borrow”.'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 4: Textbook Exercise',
+          instruction: 'Textbook Challenge! Fill in the blank: “Younger brother doesn’t have a cellphone.”',
+          sentenceParts: [
+            { zh: [['弟','dì'],['弟','di']] },
+            { blank: true },
+            { zh: [['手','shǒu'],['机','jī'],['。','']] }
+          ],
+          options: [
+            { id: 'meiyou', zh: [['没','méi'],['有','yǒu']], correct: true },
+            { id: 'keyi', zh: [['可','kě'],['以','yǐ']], correct: false },
+            { id: 'dui', zh: [['对','duì']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['没','méi'],['有','yǒu']]),
+          explainText: 'From Lesson 4 p.51: <b>弟弟没有手机。</b> (Younger brother doesn’t have a cellphone.) <b>没有</b> is placed before the item a person does not have.'
+        },
+        {
+          chapter: 1,
+          type: 'dialogue-qa',
+          skill: 'Adv 2 • Lesson 4: Textbook Dialogue',
+          instruction: 'Textbook Q&A (p.51): Someone asks “你有没有狗？” (Do you have a dog?). Choose the right answer!',
+          questionZh: [['你','nǐ'],['有','yǒu'],['没','méi'],['有','yǒu'],['狗','gǒu'],['？','']],
+          options: [
+            { zh: [['我','wǒ'],['没','méi'],['有','yǒu'],['狗','gǒu'],['。','']], correct: true },
+            { zh: [['什','shén'],['么','me'],['狗','gǒu'],['？','']], correct: false },
+            { zh: [['看','kàn'],['彩','cǎi'],['虹','hóng'],['。','']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['我','wǒ'],['没','méi'],['有','yǒu'],['狗','gǒu'],['。','']]),
+          explainText: 'From Lesson 4 p.51: To answer <b>你有没有狗？</b> (Do you have a dog?), you say <b>我没有狗。</b> (I don’t have a dog.)'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-position',
+          skill: 'Adv 2 • Lesson 4: Textbook Placement',
+          instruction: 'Textbook Placement (p.54): Put “可以 (kě yǐ)” in the right spot to say “You can eat an apple.”',
+          targetWord: [['可','kě'],['以','yǐ']],
+          sentenceSlots: [
+            { zh: [['你','nǐ']] },
+            { slot: 'A' },
+            { zh: [['吃','chī']] },
+            { slot: 'B' },
+            { zh: [['苹','píng'],['果','guǒ'],['。','']] }
+          ],
+          correctSlot: 'A',
+          explainAnswerHtml: `Position A: ${renderZh([['你','nǐ'],['可','kě'],['以','yǐ'],['吃','chī'],['苹','píng'],['果','guǒ'],['。','']])}`,
+          explainText: 'From Lesson 4 p.54: <b>可以</b> goes before the action verb <b>吃 (eat)</b> → <b>你可以吃苹果。</b> (You can eat an apple.)'
+        },
+
+        // LESSON 5 (Textbook p.63-68 unused items)
+        {
+          chapter: 2,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 5: Textbook Exercise',
+          instruction: 'Textbook Challenge (p.63): Fill in the blank: “My house is very big.”',
+          sentenceParts: [
+            { zh: [['我','wǒ'],['的','de']] },
+            { blank: true },
+            { zh: [['很','hěn'],['大','dà'],['。','']] }
+          ],
+          options: [
+            { id: 'jia', zh: [['家','jiā']], correct: true },
+            { id: 'na', zh: [['那','nà']], correct: false },
+            { id: 'ma', zh: [['吗','ma']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['家','jiā']]),
+          explainText: 'From Lesson 5 p.63: <b>我的家很大。</b> (My house is very big.) <b>家 (jiā)</b> means “house” or “home”.'
+        },
+        {
+          chapter: 2,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 5: Textbook Exercise',
+          instruction: 'Textbook Challenge (p.65): Pointing far away — “Who is that?”',
+          sentenceParts: [
+            { blank: true },
+            { zh: [['是','shì'],['谁','shéi'],['？','']] }
+          ],
+          options: [
+            { id: 'na', zh: [['那','nà']], correct: true },
+            { id: 'dui', zh: [['对','duì']], correct: false },
+            { id: 'kan', zh: [['看','kàn']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['那','nà']]),
+          explainText: 'From Lesson 5 p.65: <b>那是谁？</b> (Who is that?) We use <b>那 (nà)</b> at the beginning to point to someone or something far away.'
+        },
+        {
+          chapter: 2,
+          type: 'dialogue-qa',
+          skill: 'Adv 2 • Lesson 5: Textbook Dialogue',
+          instruction: 'Textbook Q&A (p.68): Someone greets you “你好吗？” (How are you?). Pick the best reply!',
+          questionZh: [['你','nǐ'],['好','hǎo'],['吗','ma'],['？','']],
+          options: [
+            { zh: [['我','wǒ'],['很','hěn'],['好','hǎo'],['。','']], correct: true },
+            { zh: [['你','nǐ'],['好','hǎo'],['。','']], correct: false },
+            { zh: [['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['我','wǒ'],['很','hěn'],['好','hǎo'],['。','']]),
+          explainText: 'From Lesson 5 p.68: <b>你好吗？</b> asks “How are you?” (because of <b>吗</b>). The proper reply is <b>我很好。</b> (I am very good.)'
+        },
+        {
+          chapter: 2,
+          type: 'dialogue-qa',
+          skill: 'Adv 2 • Lesson 5: Textbook Dialogue',
+          instruction: 'Textbook Q&A (p.68): Someone asks “那是你的学校吗？” (Is that your school?). Choose the reply!',
+          questionZh: [['那','nà'],['是','shì'],['你','nǐ'],['的','de'],['学','xué'],['校','xiào'],['吗','ma'],['？','']],
+          options: [
+            { zh: [['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['的','de'],['学','xué'],['校','xiào'],['。','']], correct: true },
+            { zh: [['学','xué'],['校','xiào'],['在','zài'],['哪','nǎ'],['里','lǐ'],['？','']], correct: false },
+            { zh: [['我','wǒ'],['没','méi'],['有','yǒu'],['书','shū'],['。','']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['的','de'],['学','xué'],['校','xiào'],['。','']]),
+          explainText: 'From Lesson 5 p.68: To confirm “Is that your school?”, answer <b>对，那是我的学校。</b> (Yes, that is my school.)'
+        },
+
+        // LESSON 6 (Textbook p.75-79 unused items)
+        {
+          chapter: 3,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 6: Textbook Exercise',
+          instruction: 'Textbook Challenge (p.75): Ask where the school is — “Where is the school?”',
+          sentenceParts: [
+            { zh: [['学','xué'],['校','xiào']] },
+            { blank: true },
+            { zh: [['？','']] }
+          ],
+          options: [
+            { id: 'zainali', zh: [['在','zài'],['哪','nǎ'],['里','lǐ']], correct: true },
+            { id: 'caihong', zh: [['彩','cǎi'],['虹','hóng']], correct: false },
+            { id: 'kandao', zh: [['看','kàn'],['到','dào']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['在','zài'],['哪','nǎ'],['里','lǐ']]),
+          explainText: 'From Lesson 6 p.75: <b>学校在哪里？</b> (Where is the school?) Put <b>在哪里 (zài nǎ lǐ)</b> after a place or object to ask where it is.'
+        },
+        {
+          chapter: 3,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 6: Textbook Exercise',
+          instruction: 'Textbook Challenge (p.77): Teacher says “Look at the teacher!”',
+          sentenceParts: [
+            { blank: true },
+            { zh: [['老','lǎo'],['师','shī'],['。','']] }
+          ],
+          options: [
+            { id: 'kan', zh: [['看','kàn']], correct: true },
+            { id: 'jie', zh: [['借','jiè']], correct: false },
+            { id: 'na', zh: [['那','nà']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['看','kàn']]),
+          explainText: 'From Lesson 6 p.77: <b>看老师。</b> (Look at the teacher.) <b>看 (kàn)</b> means “to look at”.'
+        },
+        {
+          chapter: 3,
+          type: 'grammar-blank',
+          skill: 'Adv 2 • Lesson 6: Textbook Exercise',
+          instruction: 'Textbook Challenge (p.79): Empty plate! “I didn’t eat anything.”',
+          sentenceParts: [
+            { zh: [['我','wǒ']] },
+            { blank: true },
+            { zh: [['吃','chī'],['。','']] }
+          ],
+          options: [
+            { id: 'shenme', zh: [['什','shén'],['么','me'],['也','yě'],['没','méi']], correct: true },
+            { id: 'keyi', zh: [['可','kě'],['以','yǐ']], correct: false },
+            { id: 'zainali', zh: [['在','zài'],['哪','nǎ'],['里','lǐ']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['什','shén'],['么','me'],['也','yě'],['没','méi']]),
+          explainText: 'From Lesson 6 p.79: <b>我什么也没吃。</b> (I didn’t eat anything.) Use <b>什么也没</b> right before the verb <b>吃 (eat)</b>.'
+        },
+        {
+          chapter: 3,
+          type: 'grammar-position',
+          skill: 'Adv 2 • Lesson 6: Textbook Placement',
+          instruction: 'Textbook Placement (p.79): Put “什么也没” in the right place: “There is nothing in the fridge.”',
+          targetWord: [['什','shén'],['么','me'],['也','yě'],['没','méi']],
+          sentenceSlots: [
+            { zh: [['冰','bīng'],['箱','xiāng']] },
+            { slot: 'A' },
+            { zh: [['里','lǐ'],['面','miàn']] },
+            { slot: 'B' },
+            { zh: [['有','yǒu'],['。','']] }
+          ],
+          correctSlot: 'B',
+          explainAnswerHtml: `Position B: ${renderZh([['冰','bīng'],['箱','xiāng'],['里','lǐ'],['面','miàn'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['有','yǒu'],['。','']])}`,
+          explainText: 'From Lesson 6 p.79: <b>什么也没</b> goes right before the verb <b>有 (have/there is)</b> → <b>冰箱里面什么也没有。</b>'
+        }
+      ],
+
+      // ===================== ADVENTURE 3 (FINAL REMAINING DRILLS -> STICKER REWARD) =====================
+      3: [
+        // LESSON 4 (Remaining p.48-55 textbook sentences)
+        {
+          chapter: 1,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 4: Final Drill',
+          instruction: 'Final Drill (p.48): “May I borrow your pencil?”',
+          sentenceParts: [
+            { zh: [['我','wǒ']] },
+            { blank: true },
+            { zh: [['借','jiè'],['你','nǐ'],['的','de'],['铅','qiān'],['笔','bǐ'],['吗','ma'],['？','']] }
+          ],
+          options: [
+            { id: 'keyi', zh: [['可','kě'],['以','yǐ']], correct: true },
+            { id: 'meiyou', zh: [['没','méi'],['有','yǒu']], correct: false },
+            { id: 'zhi', zh: [['支','zhī']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['可','kě'],['以','yǐ']]),
+          explainText: 'From Lesson 4 p.48: <b>我可以借你的铅笔吗？</b> (May I borrow your pencil?) Use <b>可以 (kě yǐ)</b> to politely ask permission.'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 4: Final Drill',
+          instruction: 'Final Drill (p.55): “Mom has eight roses.” (Long stems!)',
+          sentenceParts: [
+            { zh: [['妈','mā'],['妈','ma'],['有','yǒu'],['八','bā']] },
+            { blank: true },
+            { zh: [['玫','méi'],['瑰','guī'],['花','huā'],['。','']] }
+          ],
+          options: [
+            { id: 'zhi', zh: [['支','zhī']], correct: true },
+            { id: 'jie', zh: [['借','jiè']], correct: false },
+            { id: 'ma', zh: [['吗','ma']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['支','zhī']]),
+          explainText: 'From Lesson 4 p.55: <b>妈妈有八支玫瑰花。</b> (Mom has eight roses.) Roses have long thin stems, so we count them with <b>支 (zhī)</b>!'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 4: Final Drill',
+          instruction: 'Final Drill (p.55): “Dad has two toothbrushes.”',
+          sentenceParts: [
+            { zh: [['爸','bà'],['爸','ba'],['有','yǒu'],['两','liǎng']] },
+            { blank: true },
+            { zh: [['牙','yá'],['刷','shuā'],['。','']] }
+          ],
+          options: [
+            { id: 'zhi', zh: [['支','zhī']], correct: true },
+            { id: 'dui', zh: [['对','duì']], correct: false },
+            { id: 'na', zh: [['那','nà']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['支','zhī']]),
+          explainText: 'From Lesson 4 p.55: <b>爸爸有两支牙刷。</b> (Dad has two toothbrushes.) Toothbrushes are long and thin, so we use <b>支 (zhī)</b>.'
+        },
+        {
+          chapter: 1,
+          type: 'grammar-position',
+          skill: 'Adv 3 • Lesson 4: Final Placement',
+          instruction: 'Final Placement (p.55): Put “支 (zhī)” in the right position: “I have one pencil.”',
+          targetWord: [['支','zhī']],
+          sentenceSlots: [
+            { zh: [['我','wǒ'],['有','yǒu']] },
+            { slot: 'A' },
+            { zh: [['一','yī']] },
+            { slot: 'B' },
+            { zh: [['铅','qiān'],['笔','bǐ'],['。','']] }
+          ],
+          correctSlot: 'B',
+          explainAnswerHtml: `Position B: ${renderZh([['我','wǒ'],['有','yǒu'],['一','yī'],['支','zhī'],['铅','qiān'],['笔','bǐ'],['。','']])}`,
+          explainText: 'From Lesson 4 p.55: The measure word <b>支</b> always goes <b>between the number (一) and the noun (铅笔)</b> → <b>我有一支铅笔。</b>'
+        },
+
+        // LESSON 5 (Remaining p.63-67 textbook sentences)
+        {
+          chapter: 2,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 5: Final Drill',
+          instruction: 'Final Drill (p.63): A: 你喜欢跑步吗？ B: “_____, I like running.”',
+          sentenceParts: [
+            { blank: true },
+            { zh: [['，',''],['我','wǒ'],['喜','xǐ'],['欢','huan'],['跑','pǎo'],['步','bù'],['。','']] }
+          ],
+          options: [
+            { id: 'dui', zh: [['对','duì']], correct: true },
+            { id: 'ma', zh: [['吗','ma']], correct: false },
+            { id: 'na', zh: [['那','nà']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['对','duì']]),
+          explainText: 'From Lesson 5 p.63: <b>对，我喜欢跑步。</b> (Yes/Correct, I like running.) Use <b>对 (duì)</b> to say “yes / correct”.'
+        },
+        {
+          chapter: 2,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 5: Final Drill',
+          instruction: 'Final Drill (p.65): Pointing across the room — “That is my younger sister.”',
+          sentenceParts: [
+            { blank: true },
+            { zh: [['是','shì'],['我','wǒ'],['妹','mèi'],['妹','mei'],['。','']] }
+          ],
+          options: [
+            { id: 'na', zh: [['那','nà']], correct: true },
+            { id: 'kan', zh: [['看','kàn']], correct: false },
+            { id: 'zhi', zh: [['支','zhī']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['那','nà']]),
+          explainText: 'From Lesson 5 p.65: <b>那是我妹妹。</b> (That is my younger sister.) <b>那 (nà)</b> means “that”.'
+        },
+        {
+          chapter: 2,
+          type: 'grammar-position',
+          skill: 'Adv 3 • Lesson 5: Final Placement',
+          instruction: 'Final Placement (p.66): Put “那 (nà)” in the right position: “That is my dad.”',
+          targetWord: [['那','nà']],
+          sentenceSlots: [
+            { slot: 'A' },
+            { zh: [['是','shì']] },
+            { slot: 'B' },
+            { zh: [['我','wǒ'],['爸','bà'],['爸','ba'],['。','']] }
+          ],
+          correctSlot: 'A',
+          explainAnswerHtml: `Position A: ${renderZh([['那','nà'],['是','shì'],['我','wǒ'],['爸','bà'],['爸','ba'],['。','']])}`,
+          explainText: 'From Lesson 5 p.66: Place <b>那 (that)</b> at the very start before <b>是 (is)</b> → <b>那是我爸爸。</b>'
+        },
+        {
+          chapter: 2,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 5: Final Drill',
+          instruction: 'Final Drill (p.67): Ask a classmate — “Do you have a schoolbag?”',
+          sentenceParts: [
+            { zh: [['你','nǐ'],['有','yǒu'],['书','shū'],['包','bāo']] },
+            { blank: true },
+            { zh: [['？','']] }
+          ],
+          options: [
+            { id: 'ma', zh: [['吗','ma']], correct: true },
+            { id: 'dui', zh: [['对','duì']], correct: false },
+            { id: 'jie', zh: [['借','jiè']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['吗','ma']]),
+          explainText: 'From Lesson 5 p.67: <b>你有书包吗？</b> (Do you have a schoolbag?) Add <b>吗 (ma)</b> at the end to form a question.'
+        },
+
+        // LESSON 6 (Remaining p.73-79 textbook sentences)
+        {
+          chapter: 3,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 6: Final Drill',
+          instruction: 'Final Drill (p.73): “Please look at the whiteboard.”',
+          sentenceParts: [
+            { zh: [['请','qǐng']] },
+            { blank: true },
+            { zh: [['白','bái'],['板','bǎn'],['。','']] }
+          ],
+          options: [
+            { id: 'kan', zh: [['看','kàn']], correct: true },
+            { id: 'na', zh: [['那','nà']], correct: false },
+            { id: 'zhi', zh: [['支','zhī']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['看','kàn']]),
+          explainText: 'From Lesson 6 p.73: <b>请看白板。</b> (Please look at the whiteboard.) <b>看 (kàn)</b> means “to look at”.'
+        },
+        {
+          chapter: 3,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 6: Final Drill',
+          instruction: 'Final Drill (p.73): “I saw a little bird.”',
+          sentenceParts: [
+            { zh: [['我','wǒ']] },
+            { blank: true },
+            { zh: [['了','le'],['一','yī'],['只','zhī'],['小','xiǎo'],['鸟','niǎo'],['。','']] }
+          ],
+          options: [
+            { id: 'kandao', zh: [['看','kàn'],['到','dào']], correct: true },
+            { id: 'caihong', zh: [['彩','cǎi'],['虹','hóng']], correct: false },
+            { id: 'jia', zh: [['家','jiā']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['看','kàn'],['到','dào']]),
+          explainText: 'From Lesson 6 p.73: <b>我看到了一只小鸟。</b> (I saw a little bird.) <b>看到 (kàn dào)</b> means “to see / saw”.'
+        },
+        {
+          chapter: 3,
+          type: 'grammar-blank',
+          skill: 'Adv 3 • Lesson 6: Final Drill',
+          instruction: 'Final Drill (p.76): “Let’s watch TV.”',
+          sentenceParts: [
+            { blank: true },
+            { zh: [['电','diàn'],['视','shì'],['吧','ba'],['。','']] }
+          ],
+          options: [
+            { id: 'kan', zh: [['看','kàn']], correct: true },
+            { id: 'jie', zh: [['借','jiè']], correct: false },
+            { id: 'dui', zh: [['对','duì']], correct: false }
+          ],
+          explainAnswerHtml: renderZh([['看','kàn']]),
+          explainText: 'From Lesson 6 p.76: <b>看电视吧。</b> (Let’s watch TV.) <b>看 (kàn)</b> is also used for watching TV or movies!'
+        },
+        {
+          chapter: 3,
+          type: 'grammar-position',
+          skill: 'Adv 3 • Lesson 6: Final Placement',
+          instruction: 'Final Placement (p.79): Put “什么也没” in the right place: “The teacher didn’t say anything.”',
+          targetWord: [['什','shén'],['么','me'],['也','yě'],['没','méi']],
+          sentenceSlots: [
+            { slot: 'A' },
+            { zh: [['老','lǎo'],['师','shī']] },
+            { slot: 'B' },
+            { zh: [['说','shuō'],['。','']] }
+          ],
+          correctSlot: 'B',
+          explainAnswerHtml: `Position B: ${renderZh([['老','lǎo'],['师','shī'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['说','shuō'],['。','']])}`,
+          explainText: 'From Lesson 6 p.79: <b>什么也没</b> goes between the subject (<b>老师</b>) and the verb (<b>说</b>) → <b>老师什么也没说。</b>'
+        }
+      ]
+    };
 
     /* ==========================================================================
        5. GAME STATE & RENDER ENGINE
        ========================================================================== */
     let playerName = 'Little Explorer';
+    let currentAdventure = 1; // 1 = Golden Trophy, 2 = Diamond Trophy, 3 = Super Sticker Pack
     let currentScreen = 'start'; // 'start' | 'play' | 'chapter-celebration' | 'victory'
     let currentStepIndex = 0;
     let correctCount = 0;
-    let selectedTool = null;     // For click-to-move pencil alternative
-    let matchSelectedLeft = null;
-    let matchSelectedRight = null;
-    let matchedKeys = new Set();
+    let totalQuestionsAnswered = 0;
+    let selectedTool = null;
     let cloudsClicked = 0;
+    let stepLocked = false;
 
     const container = document.getElementById('gameContainer');
 
+    function getSteps() {
+      return ADVENTURES[currentAdventure];
+    }
+
     function updateProgressPills() {
-      const step = GAME_STEPS[currentStepIndex];
+      const steps = getSteps();
+      const step = steps[currentStepIndex];
       const activeChap = currentScreen === 'victory' ? 4 : (step ? step.chapter : 0);
 
       for (let c = 1; c <= 3; c++) {
         const pill = document.getElementById(`pill-${c}`);
         pill.classList.remove('active', 'done');
-        if (currentScreen === 'start') continue;
+        const label = c === 1 ? 'Pencil' : c === 2 ? 'Home' : 'Rainbow';
+        if (currentScreen === 'start') {
+          pill.textContent = `${c}. ${label}`;
+          continue;
+        }
         if (c < activeChap || currentScreen === 'victory') {
           pill.classList.add('done');
-          pill.textContent = `✅ ${c}. ${c === 1 ? 'Pencil' : c === 2 ? 'Home' : 'Rainbow'}`;
+          pill.textContent = `✅ ${c}. ${label}`;
         } else if (c === activeChap) {
           pill.classList.add('active');
-          pill.textContent = `⭐ ${c}. ${c === 1 ? 'Pencil' : c === 2 ? 'Home' : 'Rainbow'}`;
+          pill.textContent = `⭐ ${c}. ${label}`;
         } else {
-          pill.textContent = `${c}. ${c === 1 ? 'Pencil' : c === 2 ? 'Home' : 'Rainbow'}`;
+          pill.textContent = `${c}. ${label}`;
         }
       }
     }
@@ -1113,13 +1944,31 @@
       fb.innerHTML = message;
     }
 
+    function openExplainModal(correctHtml, reasonText) {
+      sfxWrong();
+      document.getElementById('explainPandaIcon').innerHTML = SVG_ART.panda('thinking', 78);
+      document.getElementById('explainCorrectAnswer').innerHTML = correctHtml;
+      document.getElementById('explainReasonText').innerHTML = reasonText;
+      document.getElementById('explainModal').classList.add('open');
+    }
+
+    function closeExplainModal() {
+      sfxClick();
+      document.getElementById('explainModal').classList.remove('open');
+    }
+
     function advanceStep() {
-      const step = GAME_STEPS[currentStepIndex];
+      const steps = getSteps();
+      const step = steps[currentStepIndex];
+      const nextStep = steps[currentStepIndex + 1];
+      const isChapterEnd = !nextStep || nextStep.chapter !== step.chapter;
+
       correctCount++;
+      totalQuestionsAnswered++;
       sfxCorrect();
 
       setTimeout(() => {
-        if (step.chapterComplete) {
+        if (isChapterEnd) {
           sfxChapterWin();
           currentScreen = 'chapter-celebration';
           render();
@@ -1133,10 +1982,8 @@
 
     function resetStepLocalState() {
       selectedTool = null;
-      matchSelectedLeft = null;
-      matchSelectedRight = null;
-      matchedKeys = new Set();
       cloudsClicked = 0;
+      stepLocked = false;
     }
 
     /* ==========================================================================
@@ -1161,37 +2008,37 @@
       container.innerHTML = `
         <div style="text-align:center; padding: 10px 0;">
           <div style="display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap;">
-            ${SVG_ART.panda('happy', 155)}
-            ${SVG_ART.rainbow(190)}
-            ${SVG_ART.rabbit(135)}
+            ${SVG_ART.panda('happy', 145)}
+            ${SVG_ART.rainbow(180)}
+            ${SVG_ART.rabbit(130)}
           </div>
 
-          <h1 style="font-size: 2.1rem; margin: 8px 0 4px; color: #1d3557;">
+          <h1 style="font-size: 2rem; margin: 6px 0 2px; color: #1d3557;">
             Little Panda’s Adventure
           </h1>
-          <div style="margin-bottom: 14px;">
+          <div style="margin-bottom: 12px;">
             ${renderZh([['小','xiǎo'],['熊','xióng'],['猫','māo'],['的','de'],['奇','qí'],['妙','miào'],['一','yī'],['天','tiān']], 'zh-large')}
           </div>
 
-          <div style="background:#edf6f9; border-radius:18px; padding:14px 20px; max-width:650px; margin:0 auto 16px; text-align:left; border: 2px solid #bee1e6;">
-            <div style="font-weight:800; color:#1d3557; margin-bottom:6px; font-size:1.05rem;">🎮 How to Play:</div>
-            <ul style="margin:0; padding-left:20px; color:#334155; line-height:1.6; font-size:0.98rem;">
-              <li>Help <b>Little Panda</b> solve 3 fun adventures: <b>Pencil</b>, <b>Home</b>, and <b>Rainbow</b>!</li>
-              <li>Click cards, match words, and drag or tap items to answer.</li>
-              <li>Use <b>Show / Hide Pinyin</b> in the top-right corner anytime you need help!</li>
+          <div style="background:#edf6f9; border-radius:18px; padding:12px 18px; max-width:660px; margin:0 auto 14px; text-align:left; border: 2px solid #bee1e6;">
+            <div style="font-weight:800; color:#1d3557; margin-bottom:4px; font-size:1.05rem;">🎮 Grammar & Dialogue Edition (3 Adventures!):</div>
+            <ul style="margin:0; padding-left:20px; color:#334155; line-height:1.55; font-size:0.96rem;">
+              <li><b>Adventure 1:</b> Earn the <b>Golden Panda Trophy 🏆</b>!</li>
+              <li><b>Adventure 2 & 3:</b> Keep going to earn more <b>ClassDojo Points</b>, the <b>Diamond Trophy 💎</b>, and the <b>Super Panda Sticker ⭐</b>!</li>
+              <li>If you pick a wrong answer, Panda will pop up with a helpful explanation!</li>
             </ul>
           </div>
 
           <div>
-            <label for="playerNameInput" style="display:block; font-weight:800; font-size:1.1rem; color:#2b2d42;">
+            <label for="playerNameInput" style="display:block; font-weight:800; font-size:1.08rem; color:#2b2d42;">
               ✏️ Type Your Name:
             </label>
             <input type="text" id="playerNameInput" class="name-input" placeholder="Enter your name..." maxlength="24" />
           </div>
 
-          <div style="margin-top: 10px;">
+          <div style="margin-top: 8px;">
             <button class="btn-primary" onclick="startGame()">
-              <span>🚀 Start Game</span>
+              <span>🚀 Start Adventure 1</span>
             </button>
           </div>
         </div>
@@ -1204,8 +2051,19 @@
       if (input && input.value.trim()) {
         playerName = input.value.trim();
       }
+      currentAdventure = 1;
       currentStepIndex = 0;
       correctCount = 0;
+      totalQuestionsAnswered = 0;
+      resetStepLocalState();
+      currentScreen = 'play';
+      render();
+    }
+
+    function startNextAdventure(advNum) {
+      sfxClick();
+      currentAdventure = advNum;
+      currentStepIndex = 0;
       resetStepLocalState();
       currentScreen = 'play';
       render();
@@ -1213,25 +2071,27 @@
 
     // --- ACTIVE STEP SCREEN ---
     function renderGameStep() {
-      const step = GAME_STEPS[currentStepIndex];
+      const steps = getSteps();
+      const step = steps[currentStepIndex];
       const chapterTitles = {
-        1: 'Lesson 4 — Panda’s Pencil',
-        2: 'Lesson 5 — Find Panda’s Home',
-        3: 'Lesson 6 — Find the Rainbow'
+        1: `Adv ${currentAdventure} • Lesson 4 — Panda’s Pencil`,
+        2: `Adv ${currentAdventure} • Lesson 5 — Find Panda’s Home`,
+        3: `Adv ${currentAdventure} • Lesson 6 — Find the Rainbow`
       };
 
       let bodyHtml = '';
-
       if (step.type === 'scene-drag-pencil') {
         bodyHtml = renderSceneDragPencil(step);
       } else if (step.type === 'vocab-en-to-zh') {
         bodyHtml = renderVocabEnToZh(step);
       } else if (step.type === 'vocab-zh-to-en') {
         bodyHtml = renderVocabZhToEn(step);
-      } else if (step.type === 'match-pairs') {
-        bodyHtml = renderMatchPairs(step);
-      } else if (step.type === 'sentence-meaning') {
-        bodyHtml = renderSentenceMeaning(step);
+      } else if (step.type === 'grammar-blank') {
+        bodyHtml = renderGrammarBlank(step);
+      } else if (step.type === 'grammar-position') {
+        bodyHtml = renderGrammarPosition(step);
+      } else if (step.type === 'dialogue-qa') {
+        bodyHtml = renderDialogueQA(step);
       } else if (step.type === 'scene-find-home') {
         bodyHtml = renderSceneFindHome(step);
       } else if (step.type === 'scene-find-rainbow') {
@@ -1240,12 +2100,13 @@
 
       container.innerHTML = `
         <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span style="background:#ffd166; padding:5px 14px; border-radius:999px; font-weight:800; font-size:0.95rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span style="background:#ffd166; padding:5px 14px; border-radius:999px; font-weight:800; font-size:0.92rem;">
               ${chapterTitles[step.chapter]}
             </span>
-            <span style="font-weight:800; color:#5c6378; font-size:0.95rem;">
-              ⭐ Stars Earned: ${correctCount}
+            <span class="skill-tag">${step.skill}</span>
+            <span style="font-weight:800; color:#5c6378; font-size:0.92rem;">
+              ⭐ Stars: ${correctCount}
             </span>
           </div>
 
@@ -1257,7 +2118,7 @@
         </div>
 
         <div id="feedbackBar" class="feedback-bar feedback-neutral">
-          Take your time and choose the best answer!
+          Read carefully and choose the best answer!
         </div>
       `;
 
@@ -1266,13 +2127,12 @@
       }
     }
 
-    // --- TASK TYPE A: LESSON 4 INTERACTIVE CLASSROOM DRAG / CLICK PENCIL ---
+    // --- TASK A: LESSON 4 CLASSROOM DRAG / CLICK PENCIL ---
     function renderSceneDragPencil(step) {
       return `
         <div class="scene-box scene-classroom">
-          <!-- Classroom Chalkboard -->
-          <div style="background:#2d6a4f; border:6px solid #bc6c25; border-radius:14px; padding:10px; color:#ffffff; text-align:center; max-width:440px; margin:0 auto 14px;">
-            <div style="font-size:0.85rem; opacity:0.9;">Classroom Story</div>
+          <div style="background:#2d6a4f; border:6px solid #bc6c25; border-radius:14px; padding:10px; color:#ffffff; text-align:center; max-width:520px; margin:0 auto 14px;">
+            <div style="font-size:0.85rem; opacity:0.9;">Textbook Dialogue (Lesson 4)</div>
             <div style="display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:8px; margin-top:4px;">
               <div class="speech-bubble" style="color:#2b2d42;">
                 <div style="font-size:0.8rem; font-weight:bold; color:#e63946;">🐼 Little Panda:</div>
@@ -1285,32 +2145,30 @@
             </div>
           </div>
 
-          <!-- Characters & Drop Zone -->
           <div style="display:flex; justify-content:space-around; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-top:8px;">
             <div id="pandaDropZone" class="drop-zone" onclick="handleDropZoneClick()" style="text-align:center; min-width:190px;">
-              <div id="pandaAvatarHolder">${SVG_ART.panda('sad', 135)}</div>
+              <div id="pandaAvatarHolder">${SVG_ART.panda('sad', 130)}</div>
               <div style="font-weight:800; background:#ffffff; border-radius:999px; padding:4px 12px; margin-top:4px;">
                 Drop / Tap Pencil Here!
               </div>
             </div>
 
-            <!-- Desk with School Supplies -->
             <div style="background:#f4a261; border:4px solid #2b2d42; border-radius:18px; padding:12px 18px; text-align:center;">
               <div style="font-weight:800; color:#2b2d42; margin-bottom:8px;">
                 🐰 Little Rabbit’s Desk (Drag or Tap):
               </div>
               <div style="display:flex; gap:14px; justify-content:center; align-items:center; flex-wrap:wrap;">
                 <div class="draggable-item" draggable="true" data-item="schoolbag" onclick="selectDeskItem('schoolbag', this)" style="background:#fff; padding:8px; border-radius:14px; border:3px solid #2b2d42;">
-                  ${SVG_ART.schoolbag(72)}
-                  <div>${renderZh(VOCAB_BANK.shubao.zh, 'zh-small')}</div>
+                  ${SVG_ART.schoolbag(68)}
+                  <div>${renderZh([['书','shū'],['包','bāo']], 'zh-small')}</div>
                 </div>
                 <div class="draggable-item" draggable="true" data-item="pencil" onclick="selectDeskItem('pencil', this)" style="background:#fff; padding:8px; border-radius:14px; border:3px solid #2b2d42;">
-                  ${SVG_ART.pencil(72)}
-                  <div>${renderZh(VOCAB_BANK.qianbi.zh, 'zh-small')}</div>
+                  ${SVG_ART.pencil(68)}
+                  <div>${renderZh([['铅','qiān'],['笔','bǐ']], 'zh-small')}</div>
                 </div>
                 <div class="draggable-item" draggable="true" data-item="book" onclick="selectDeskItem('book', this)" style="background:#fff; padding:8px; border-radius:14px; border:3px solid #2b2d42;">
-                  ${SVG_ART.book(72)}
-                  <div>${renderZh(VOCAB_BANK.shu.zh, 'zh-small')}</div>
+                  ${SVG_ART.book(68)}
+                  <div>${renderZh([['书','shū']], 'zh-small')}</div>
                 </div>
               </div>
             </div>
@@ -1352,45 +2210,46 @@
       document.querySelectorAll('.draggable-item').forEach(d => d.classList.remove('selected-item'));
       el.classList.add('selected-item');
       selectedTool = itemKey;
-      setFeedback('neutral', `Selected! Now click on Little Panda to give it!`);
+      setFeedback('neutral', 'Selected! Now click on Little Panda to give it!');
     }
 
     function handleDropZoneClick() {
       if (!selectedTool) {
         sfxClick();
-        setFeedback('retry', 'First tap or drag an item from Little Rabbit’s desk!');
+        openExplainModal(
+          renderZh([['铅','qiān'],['笔','bǐ']]),
+          'First tap or drag the <b>pencil (铅笔)</b> from Little Rabbit’s desk, then click on Little Panda!'
+        );
         return;
       }
       evaluatePencilDelivery(selectedTool);
     }
 
-    let pencilDelivered = false;
     function evaluatePencilDelivery(itemKey) {
-      if (pencilDelivered) return;
+      if (stepLocked) return;
       if (itemKey === 'pencil') {
-        pencilDelivered = true;
+        stepLocked = true;
         const holder = document.getElementById('pandaAvatarHolder');
         if (holder) {
-          holder.innerHTML = SVG_ART.panda('pencil', 135);
+          holder.innerHTML = SVG_ART.panda('pencil', 130);
           holder.classList.add('panda-jump');
         }
         setFeedback('success', '⭐ Awesome! Little Panda got the pencil (铅笔)! +1 Star!');
-        setTimeout(() => { pencilDelivered = false; }, 1400);
         advanceStep();
       } else {
-        sfxWrong();
-        setFeedback('retry', 'Oops! Little Panda needs a pencil (铅笔). Try Again!');
+        openExplainModal(
+          renderZh([['铅','qiān'],['笔','bǐ']]),
+          'Little Panda said <b>“我没有铅笔”</b> (I don’t have a pencil). Please give Little Panda the <b>pencil (铅笔)</b>!'
+        );
       }
     }
 
-    // --- TASK TYPE B: ENGLISH -> CHINESE ---
+    // --- TASK B: ENGLISH -> CHINESE ---
     function renderVocabEnToZh(step) {
       const cards = step.options.map(key => {
         const item = VOCAB_BANK[key];
-        const artHtml = item.art && SVG_ART[item.art] ? `<div style="margin-bottom:6px;">${SVG_ART[item.art](68)}</div>` : '';
         return `
-          <div class="choice-card" onclick="checkSimpleChoice(this, '${key === step.answer}')">
-            ${artHtml}
+          <div class="choice-card" onclick="handleChoiceWithExplain(this, ${key === step.answer})">
             ${renderZh(item.zh, 'zh-large')}
           </div>
         `;
@@ -1399,7 +2258,7 @@
       return `
         <div style="text-align:center; background:#ffffff; border-radius:20px; padding:22px; border:3px solid #e2e8f0;">
           <div style="font-size:1rem; color:#5c6378; font-weight:700;">English Meaning:</div>
-          <div style="font-size:2.1rem; font-weight:900; color:#1d3557; margin-top:4px;">
+          <div style="font-size:2rem; font-weight:900; color:#1d3557; margin-top:4px;">
             “${step.promptEn}”
           </div>
         </div>
@@ -1407,137 +2266,103 @@
       `;
     }
 
-    // --- TASK TYPE C: CHINESE -> ENGLISH ---
+    // --- TASK C: CHINESE -> ENGLISH ---
     function renderVocabZhToEn(step) {
       const promptItem = VOCAB_BANK[step.promptZh];
-      const artHtml = promptItem.art && SVG_ART[promptItem.art]
-        ? `<div style="margin-bottom:6px;">${SVG_ART[promptItem.art](82)}</div>`
-        : '';
-
       const cards = step.options.map(enOpt => `
-        <div class="choice-card" onclick="checkSimpleChoice(this, '${enOpt === step.answer}')">
+        <div class="choice-card" onclick="handleChoiceWithExplain(this, ${enOpt === step.answer})">
           <div class="choice-en">${enOpt}</div>
         </div>
       `).join('');
 
       return `
         <div style="text-align:center; background:#ffffff; border-radius:20px; padding:22px; border:3px solid #e2e8f0;">
-          ${artHtml}
-          <div style="margin-top:4px;">
-            ${renderZh(promptItem.zh, 'zh-large')}
+          ${renderZh(promptItem.zh, 'zh-large')}
+        </div>
+        <div class="choice-grid">${cards}</div>
+      `;
+    }
+
+    // --- TASK D: GRAMMAR FILL-IN-THE-BLANK ---
+    function renderGrammarBlank(step) {
+      const sentenceHtml = step.sentenceParts.map(part => {
+        if (part.blank) {
+          return `<span class="blank-slot">?</span>`;
+        }
+        return renderZh(part.zh, 'zh-large');
+      }).join('');
+
+      const cards = step.options.map(opt => `
+        <div class="choice-card" onclick="handleChoiceWithExplain(this, ${opt.correct})">
+          ${renderZh(opt.zh, 'zh-large')}
+        </div>
+      `).join('');
+
+      return `
+        <div style="display:flex; align-items:center; justify-content:center; gap:14px; background:#ffffff; border-radius:20px; padding:20px; border:3px solid #e2e8f0; flex-wrap:wrap;">
+          ${SVG_ART.panda('normal', 88)}
+          <div class="speech-bubble" style="display:flex; align-items:flex-end; flex-wrap:wrap; justify-content:center; gap:4px;">
+            ${sentenceHtml}
           </div>
         </div>
         <div class="choice-grid">${cards}</div>
       `;
     }
 
-    // --- TASK TYPE D: MATCHING PAIRS (Click Chinese -> Click English) ---
-    function renderMatchPairs(step) {
-      // Deterministic shuffle for right column so it isn't always straight across
-      const leftKeys = [...step.pairs];
-      const rightKeys = [...step.pairs].reverse();
-      if (rightKeys.length >= 3) {
-        const temp = rightKeys[0];
-        rightKeys[0] = rightKeys[1];
-        rightKeys[1] = temp;
-      }
-
-      const leftHtml = leftKeys.map(k => {
-        const isMatched = matchedKeys.has(k);
-        const isSelected = matchSelectedLeft === k;
-        return `
-          <div class="match-tile ${isMatched ? 'matched' : ''} ${isSelected ? 'selected' : ''}"
-               onclick="selectMatchLeft('${k}')">
-            ${renderZh(VOCAB_BANK[k].zh)}
-          </div>
-        `;
+    // --- TASK E: GRAMMAR WORD PLACEMENT (A / B / C) ---
+    function renderGrammarPosition(step) {
+      const slotsHtml = step.sentenceSlots.map(part => {
+        if (part.slot) {
+          return `<span class="slot-badge">[ ${part.slot} ]</span>`;
+        }
+        return renderZh(part.zh, 'zh-large');
       }).join('');
 
-      const rightHtml = rightKeys.map(k => {
-        const isMatched = matchedKeys.has(k);
-        const isSelected = matchSelectedRight === k;
-        return `
-          <div class="match-tile ${isMatched ? 'matched' : ''} ${isSelected ? 'selected' : ''}"
-               onclick="selectMatchRight('${k}')">
-            <span class="choice-en">${VOCAB_BANK[k].en}</span>
-          </div>
-        `;
-      }).join('');
+      const slotLetters = step.sentenceSlots.filter(p => p.slot).map(p => p.slot);
+      const cards = slotLetters.map(letter => `
+        <div class="choice-card" onclick="handleChoiceWithExplain(this, ${letter === step.correctSlot})">
+          <div style="font-size:1.8rem; font-weight:900; color:#1d3557;">Position ${letter}</div>
+        </div>
+      `).join('');
 
       return `
-        <div class="match-columns">
-          <div class="match-col">${leftHtml}</div>
-          <div class="match-col">${rightHtml}</div>
+        <div style="text-align:center; background:#ffffff; border-radius:20px; padding:18px; border:3px solid #e2e8f0;">
+          <div style="margin-bottom:10px; font-weight:800; color:#5c6378;">
+            Target Word: ${renderZh(step.targetWord)}
+          </div>
+          <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px; background:#f8f9fa; padding:14px; border-radius:16px;">
+            ${slotsHtml}
+          </div>
         </div>
+        <div class="choice-grid">${cards}</div>
       `;
     }
 
-    function selectMatchLeft(key) {
-      if (matchedKeys.has(key)) return;
-      sfxClick();
-      matchSelectedLeft = key;
-      evaluateMatchAttempt();
-    }
-
-    function selectMatchRight(key) {
-      if (matchedKeys.has(key)) return;
-      sfxClick();
-      matchSelectedRight = key;
-      evaluateMatchAttempt();
-    }
-
-    function evaluateMatchAttempt() {
-      const step = GAME_STEPS[currentStepIndex];
-      if (matchSelectedLeft && matchSelectedRight) {
-        if (matchSelectedLeft === matchSelectedRight) {
-          matchedKeys.add(matchSelectedLeft);
-          matchSelectedLeft = null;
-          matchSelectedRight = null;
-          render();
-          if (matchedKeys.size === step.pairs.length) {
-            setFeedback('success', '⭐ All pairs matched! Great job!');
-            advanceStep();
-          } else {
-            sfxCorrect();
-            setFeedback('success', '⭐ Nice match! Keep going!');
-          }
-        } else {
-          sfxWrong();
-          matchSelectedLeft = null;
-          matchSelectedRight = null;
-          render();
-          setFeedback('retry', 'Not a match! Try Again!');
-        }
-      } else {
-        render();
-      }
-    }
-
-    // --- TASK TYPE E: SENTENCE COMPREHENSION ---
-    function renderSentenceMeaning(step) {
+    // --- TASK F: DIALOGUE Q&A ---
+    function renderDialogueQA(step) {
       const cards = step.options.map(opt => `
-        <div class="choice-card" onclick="checkSimpleChoice(this, '${opt.correct}')">
-          <div class="choice-en">${opt.text}</div>
+        <div class="choice-card" onclick="handleChoiceWithExplain(this, ${opt.correct})">
+          ${renderZh(opt.zh)}
         </div>
       `).join('');
 
       return `
         <div style="display:flex; align-items:center; justify-content:center; gap:16px; background:#ffffff; border-radius:20px; padding:18px; border:3px solid #e2e8f0; flex-wrap:wrap;">
-          ${SVG_ART.panda('normal', 95)}
+          ${SVG_ART.rabbit(92)}
           <div class="speech-bubble">
-            ${renderZh(step.sentenceZh, 'zh-large')}
+            ${renderZh(step.questionZh, 'zh-large')}
           </div>
         </div>
         <div class="choice-grid">${cards}</div>
       `;
     }
 
-    // --- TASK TYPE F: LESSON 5 FIND PANDA'S HOME SCENE ---
+    // --- TASK G: LESSON 5 FIND PANDA'S HOME SCENE ---
     function renderSceneFindHome(step) {
       return `
         <div class="scene-box scene-street">
           <div style="display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
-            <div id="streetPanda">${SVG_ART.panda('normal', 105)}</div>
+            <div id="streetPanda">${SVG_ART.panda('normal', 100)}</div>
             <div class="speech-bubble">
               ${renderZh(step.clueZh)}
               <div style="font-size:0.92rem; color:#457b9d; font-weight:700; margin-top:4px;">
@@ -1547,16 +2372,16 @@
           </div>
 
           <div style="display:flex; justify-content:space-around; align-items:flex-end; flex-wrap:wrap; gap:12px;">
-            <div class="choice-card" style="background:rgba(255,255,255,0.85);" onclick="checkHouseChoice(this, false)">
-              ${SVG_ART.house('#4361ee', '#ffffff', false, 130)}
+            <div class="choice-card" style="background:rgba(255,255,255,0.88);" onclick="checkHouseChoice(this, false)">
+              ${SVG_ART.house('#4361ee', '#ffffff', false, 125)}
               <div style="font-weight:800; margin-top:4px;">House A</div>
             </div>
-            <div class="choice-card" style="background:rgba(255,255,255,0.85);" onclick="checkHouseChoice(this, true)">
-              ${SVG_ART.house('#ff6b6b', '#fff3b0', true, 130)}
+            <div class="choice-card" style="background:rgba(255,255,255,0.88);" onclick="checkHouseChoice(this, true)">
+              ${SVG_ART.house('#ff6b6b', '#fff3b0', true, 125)}
               <div style="font-weight:800; margin-top:4px;">House B</div>
             </div>
-            <div class="choice-card" style="background:rgba(255,255,255,0.85);" onclick="checkHouseChoice(this, false)">
-              ${SVG_ART.house('#8338ec', '#e0fbfc', false, 130)}
+            <div class="choice-card" style="background:rgba(255,255,255,0.88);" onclick="checkHouseChoice(this, false)">
+              ${SVG_ART.house('#7209b7', '#e0fbfc', false, 125)}
               <div style="font-weight:800; margin-top:4px;">House C</div>
             </div>
           </div>
@@ -1564,7 +2389,6 @@
       `;
     }
 
-    let stepLocked = false;
     function checkHouseChoice(el, isCorrect) {
       if (stepLocked) return;
       if (isCorrect) {
@@ -1572,55 +2396,55 @@
         el.classList.add('correct');
         const p = document.getElementById('streetPanda');
         if (p) {
-          p.innerHTML = SVG_ART.panda('happy', 105);
+          p.innerHTML = SVG_ART.panda('happy', 100);
           p.classList.add('panda-jump');
         }
         setFeedback('success', '⭐ 对，那是我家！Little Panda found home!');
-        setTimeout(() => { stepLocked = false; }, 1300);
         advanceStep();
       } else {
-        sfxWrong();
         el.classList.add('wrong');
         setTimeout(() => el.classList.remove('wrong'), 500);
-        setFeedback('retry', 'Not that house! Look for the bamboo and panda sign. Try Again!');
+        openExplainModal(
+          'House B (with Bamboo & Panda Sign)',
+          'Little Panda said <b>“对，那是我家。”</b> (Yes, that is my house.) Look closely at <b>House B</b> — it has green bamboo and a panda face on the roof!'
+        );
       }
     }
 
-    // --- TASK TYPE G: LESSON 6 FIND THE RAINBOW SCENE ---
-    function renderSceneFindRainbow(step) {
+    // --- TASK H: LESSON 6 FIND THE RAINBOW SCENE ---
+    function renderSceneFindRainbow() {
       return `
-        <div class="scene-box scene-sky" style="min-height:330px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="scene-box scene-sky" style="min-height:320px; display:flex; flex-direction:column; justify-content:space-between;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-            ${SVG_ART.sun(82)}
-            <div id="rainbowRevealArea" style="min-height:135px; display:flex; align-items:center; justify-content:center;">
+            ${SVG_ART.sun(80)}
+            <div id="rainbowRevealArea" style="min-height:130px; display:flex; align-items:center; justify-content:center;">
               <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
                 <div class="cloud-float" style="cursor:pointer;" onclick="clickSkyCloud(this, 1)">
-                  ${SVG_ART.cloud(130, '☁️ 1')}
+                  ${SVG_ART.cloud(125, '☁️ 1')}
                 </div>
                 <div class="cloud-float" style="cursor:pointer; animation-delay:0.6s;" onclick="clickSkyCloud(this, 2)">
-                  ${SVG_ART.cloud(130, '☁️ 2')}
+                  ${SVG_ART.cloud(125, '☁️ 2')}
                 </div>
                 <div class="cloud-float" style="cursor:pointer; animation-delay:1.2s;" onclick="clickSkyCloud(this, 3)">
-                  ${SVG_ART.cloud(130, '☁️ 3')}
+                  ${SVG_ART.cloud(125, '☁️ 3')}
                 </div>
               </div>
             </div>
           </div>
 
           <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:10px;">
-            <div id="skyPanda">${SVG_ART.panda('normal', 110)}</div>
+            <div id="skyPanda">${SVG_ART.panda('normal', 105)}</div>
             <div class="speech-bubble" id="skySpeech">
               ${renderZh([['在','zài'],['哪','nǎ'],['里','lǐ'],['？','']])}
             </div>
-            ${SVG_ART.rabbit(100)}
+            ${SVG_ART.rabbit(96)}
           </div>
         </div>
       `;
     }
 
     function clickSkyCloud(cloudEl, cloudNum) {
-      if (stepLocked) return;
-      if (cloudEl.dataset.cleared === 'true') return;
+      if (stepLocked || cloudEl.dataset.cleared === 'true') return;
 
       cloudEl.dataset.cleared = 'true';
       cloudEl.style.opacity = '0.25';
@@ -1631,69 +2455,77 @@
       if (cloudsClicked < 3) {
         sfxClick();
         if (speech) {
-          speech.innerHTML = renderZh([['我','wǒ'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['看','kàn'],['到','dào'],['。','']]);
+          speech.innerHTML = renderZh([['我','wǒ'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['看','kàn'],['到','dào'],['！','']]);
         }
-        setFeedback('neutral', `Cloud ${cloudNum} moved! “我什么也没看到。” Click another cloud!`);
+        setFeedback('neutral', `Cloud ${cloudNum} moved! “我什么也没看到！” Click the remaining clouds!`);
       } else {
         stepLocked = true;
         const area = document.getElementById('rainbowRevealArea');
         const panda = document.getElementById('skyPanda');
         if (area) {
-          area.innerHTML = `<div style="animation: popBounce 0.6s ease;">${SVG_ART.rainbow(240)}</div>`;
+          area.innerHTML = `<div style="animation: popBounce 0.6s ease;">${SVG_ART.rainbow(230)}</div>`;
         }
         if (speech) {
           speech.innerHTML = renderZh([['看','kàn'],['彩','cǎi'],['虹','hóng'],['！','']], 'zh-large');
         }
         if (panda) {
-          panda.innerHTML = SVG_ART.panda('happy', 110);
+          panda.innerHTML = SVG_ART.panda('happy', 105);
           panda.classList.add('panda-jump');
         }
         setFeedback('success', '🌈 看彩虹！You found the rainbow!');
-        setTimeout(() => { stepLocked = false; }, 1400);
         advanceStep();
       }
     }
 
-    // --- GENERIC MULTIPLE CHOICE EVALUATOR ---
-    function checkSimpleChoice(cardEl, isCorrectStr) {
+    // --- MULTIPLE CHOICE WITH WRONG-ANSWER EXPLANATION MODAL ---
+    function handleChoiceWithExplain(cardEl, isCorrect) {
       if (stepLocked) return;
-      const isCorrect = isCorrectStr === 'true';
+      const step = getSteps()[currentStepIndex];
+
       if (isCorrect) {
         stepLocked = true;
         cardEl.classList.add('correct');
         setFeedback('success', '⭐ Great job! +1 Star!');
-        setTimeout(() => { stepLocked = false; }, 1250);
         advanceStep();
       } else {
-        sfxWrong();
         cardEl.classList.add('wrong');
         setTimeout(() => cardEl.classList.remove('wrong'), 500);
-        setFeedback('retry', 'Try Again! You can do it!');
+        openExplainModal(step.explainAnswerHtml, step.explainText);
       }
     }
 
     /* ==========================================================================
-       7. CHAPTER CELEBRATION & FINAL GOLDEN PANDA TROPHY SCREEN
+       7. CHAPTER CELEBRATION & MULTI-ADVENTURE VICTORY SCREENS
        ========================================================================== */
     function renderChapterCelebration() {
-      const completedStep = GAME_STEPS[currentStepIndex];
+      const steps = getSteps();
+      const completedStep = steps[currentStepIndex];
       const chap = completedStep.chapter;
+      const isLastChapterOfAdventure = currentStepIndex + 1 >= steps.length;
+
       const messages = {
-        1: { title: 'Lesson 4 Complete!', subtitle: 'Little Panda has a pencil now! (我有铅笔了！)', art: SVG_ART.panda('pencil', 150) },
-        2: { title: 'Lesson 5 Complete!', subtitle: 'Little Panda is safely home! (我回家了！)', art: SVG_ART.house('#ff6b6b', '#fff3b0', true, 150) },
-        3: { title: 'Lesson 6 Complete!', subtitle: 'Little Panda found the beautiful rainbow! (看到彩虹了！)', art: SVG_ART.rainbow(220) }
+        1: { title: `Adventure ${currentAdventure} — Lesson 4 Complete!`, subtitle: 'Little Panda mastered 铅笔, 可以, 借, and 支!', art: SVG_ART.panda('pencil', 145) },
+        2: { title: `Adventure ${currentAdventure} — Lesson 5 Complete!`, subtitle: 'Little Panda mastered 那, 家, 吗, and 对!', art: SVG_ART.house('#ff6b6b', '#fff3b0', true, 145) },
+        3: { title: `Adventure ${currentAdventure} — Lesson 6 Complete!`, subtitle: 'Little Panda mastered 看, 彩虹, 在哪里, and 什么也没!', art: SVG_ART.rainbow(210) }
       };
       const info = messages[chap];
 
+      let nextBtnText = 'Next Chapter ➡️';
+      if (isLastChapterOfAdventure) {
+        if (currentAdventure === 1) nextBtnText = 'Claim Golden Panda Trophy 🏆';
+        else if (currentAdventure === 2) nextBtnText = 'Claim Diamond Panda Trophy 💎';
+        else nextBtnText = 'Claim Super Panda Sticker 🌟';
+      }
+
       container.innerHTML = `
         <div style="text-align:center; padding: 24px 12px;">
-          <div style="font-size:2.5rem;">🎉 ⭐ 🎉</div>
-          <h2 style="font-size:2rem; color:#1d3557; margin:8px 0;">${info.title}</h2>
-          <p style="font-size:1.2rem; font-weight:700; color:#2a9d8f; margin-bottom:16px;">${info.subtitle}</p>
+          <div style="font-size:2.4rem;">🎉 ⭐ 🎉</div>
+          <h2 style="font-size:1.95rem; color:#1d3557; margin:8px 0;">${info.title}</h2>
+          <p style="font-size:1.15rem; font-weight:700; color:#2a9d8f; margin-bottom:16px;">${info.subtitle}</p>
           <div class="panda-jump" style="margin: 12px 0;">${info.art}</div>
           <div style="margin-top:20px;">
             <button class="btn-primary" onclick="continueAfterChapter()">
-              <span>${chap < 3 ? 'Next Chapter ➡️' : 'Claim Golden Trophy 🏆'}</span>
+              <span>${nextBtnText}</span>
             </button>
           </div>
         </div>
@@ -1702,7 +2534,8 @@
 
     function continueAfterChapter() {
       sfxClick();
-      if (currentStepIndex + 1 < GAME_STEPS.length) {
+      const steps = getSteps();
+      if (currentStepIndex + 1 < steps.length) {
         currentStepIndex++;
         resetStepLocalState();
         currentScreen = 'play';
@@ -1714,52 +2547,141 @@
     }
 
     function renderVictoryScreen() {
-      container.innerHTML = `
-        <div class="cert-box">
-          <div style="font-size:1.3rem; font-weight:900; color:#e08200; letter-spacing:1px;">
-            🌟 GRADE 2 CHINESE REVIEW CERTIFICATE 🌟
-          </div>
-          <h1 style="font-size:2.3rem; color:#1d3557; margin:8px 0;">
-            Congratulations, ${escapeHtml(playerName)}!
-          </h1>
+      if (currentAdventure === 1) {
+        // ADVENTURE 1 COMPLETE -> GOLDEN TROPHY + INVITE TO ADVENTURE 2!
+        container.innerHTML = `
+          <div class="cert-box">
+            <div style="font-size:1.15rem; font-weight:900; color:#e08200; letter-spacing:1px;">
+              🌟 ADVENTURE 1 COMPLETE 🌟
+            </div>
+            <h1 style="font-size:2.1rem; color:#1d3557; margin:6px 0;">
+              Congratulations, ${escapeHtml(playerName)}!
+            </h1>
 
-          <div style="display:flex; justify-content:center; align-items:center; gap:18px; flex-wrap:wrap; margin:10px 0;">
-            ${SVG_ART.panda('happy', 120)}
-            <div class="panda-jump">${SVG_ART.trophy(145)}</div>
-            ${SVG_ART.rabbit(110)}
-          </div>
+            <div style="display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap; margin:8px 0;">
+              ${SVG_ART.panda('happy', 110)}
+              <div class="panda-jump">${SVG_ART.trophy(140, false)}</div>
+              ${SVG_ART.rabbit(100)}
+            </div>
 
-          <div style="font-size:1.35rem; font-weight:900; color:#d97706; margin-bottom:12px;">
-            🏆 Golden Panda Trophy Unlocked! 🏆
-          </div>
+            <div style="font-size:1.3rem; font-weight:900; color:#d97706; margin-bottom:10px;">
+              🏆 Golden Panda Trophy Unlocked! 🏆
+            </div>
 
-          <div style="background:#ffffff; border-radius:16px; padding:14px 20px; max-width:520px; margin:0 auto 16px; border:2px solid #ffd166; text-align:left;">
-            <div style="font-weight:800; margin-bottom:6px; color:#2b2d42;">✅ Adventure Summary:</div>
-            <div style="line-height:1.7; font-weight:700; color:#334155;">
-              <div>• Lesson 4 — Panda’s Pencil: <span style="color:#2d6a4f;">Completed ✅</span></div>
-              <div>• Lesson 5 — Find Panda’s Home: <span style="color:#2d6a4f;">Completed ✅</span></div>
-              <div>• Lesson 6 — Find the Rainbow: <span style="color:#2d6a4f;">Completed ✅</span></div>
-              <div>• Stars Earned: <span style="color:#e08200;">⭐ ${correctCount} / ${GAME_STEPS.length}</span></div>
+            <div style="background:#ffffff; border-radius:16px; padding:12px 18px; max-width:520px; margin:0 auto 12px; border:2px solid #ffd166; text-align:left; font-weight:700; color:#334155;">
+              <div>• Lesson 4, 5 & 6 (Adventure 1): <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Total Stars Earned: <span style="color:#e08200;">⭐ ${correctCount} Stars</span></div>
+            </div>
+
+            <div style="background:#fff8e1; border:3px dashed #ff9f1c; border-radius:20px; padding:14px 18px; max-width:560px; margin:0 auto 14px;">
+              <div style="font-size:1.2rem; font-weight:900; color:#1d3557; margin-bottom:6px;">
+                🌟 Want to earn MORE ClassDojo points? 🌟
+              </div>
+              <p style="margin:0 0 12px; color:#475569; font-weight:700; font-size:0.98rem;">
+                Challenge <b>Adventure 2</b> with brand-new textbook questions from Lessons 4, 5 & 6 to win the <b>Diamond Panda Trophy</b>!
+              </p>
+              <button class="btn-primary" onclick="startNextAdventure(2)">
+                <span>🚀 Start Adventure 2 (+More Dojo Points!)</span>
+              </button>
+            </div>
+
+            <div>
+              <button class="toggle-btn" onclick="restartGame()">🔄 Restart from Beginning</button>
             </div>
           </div>
+        `;
+      } else if (currentAdventure === 2) {
+        // ADVENTURE 2 COMPLETE -> DIAMOND TROPHY + INVITE TO ADVENTURE 3 (FINAL STICKER)!
+        container.innerHTML = `
+          <div class="cert-box" style="background: linear-gradient(135deg, #f0f9ff 0%, #caf0f8 100%); border-color: #0096c7;">
+            <div style="font-size:1.15rem; font-weight:900; color:#0077b6; letter-spacing:1px;">
+              💎 ADVENTURE 2 COMPLETE 💎
+            </div>
+            <h1 style="font-size:2.1rem; color:#1d3557; margin:6px 0;">
+              Amazing Work, ${escapeHtml(playerName)}!
+            </h1>
 
-          <div style="background:#d8f3dc; color:#1b4332; padding:10px 18px; border-radius:999px; display:inline-block; font-weight:800; font-size:1rem; margin-bottom:16px;">
-            🎟️ Show this screen to your teacher for ClassDojo points!
-          </div>
+            <div style="display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap; margin:8px 0;">
+              ${SVG_ART.panda('happy', 110)}
+              <div class="panda-jump">${SVG_ART.trophy(140, true)}</div>
+              ${SVG_ART.rabbit(100)}
+            </div>
 
-          <div>
-            <button class="btn-primary" onclick="restartGame()">
-              <span>🔄 Play Again</span>
-            </button>
+            <div style="font-size:1.3rem; font-weight:900; color:#0077b6; margin-bottom:10px;">
+              💎 Diamond Panda Trophy Unlocked! 💎
+            </div>
+
+            <div style="background:#ffffff; border-radius:16px; padding:12px 18px; max-width:520px; margin:0 auto 12px; border:2px solid #90e0ef; text-align:left; font-weight:700; color:#334155;">
+              <div>• Adventure 1 (Golden Trophy): <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Adventure 2 (Diamond Trophy): <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Total Stars Earned: <span style="color:#0077b6;">⭐ ${correctCount} Stars</span></div>
+            </div>
+
+            <div style="background:#f3e8ff; border:3px dashed #7209b7; border-radius:20px; padding:14px 18px; max-width:560px; margin:0 auto 14px;">
+              <div style="font-size:1.2rem; font-weight:900; color:#5a189a; margin-bottom:6px;">
+                🎁 Ready for the Final Challenge? Win a Special Sticker! 🎁
+              </div>
+              <p style="margin:0 0 12px; color:#475569; font-weight:700; font-size:0.98rem;">
+                Complete <b>Adventure 3</b> (the final textbook questions!) to unlock the <b>Super Panda Sticker</b> and maximum ClassDojo points!
+              </p>
+              <button class="btn-primary" style="background: linear-gradient(180deg, #9d4edd 0%, #7209b7 100%); box-shadow: 0 6px 0 #480ca8;" onclick="startNextAdventure(3)">
+                <span>🌟 Start Adventure 3 (Win Sticker!)</span>
+              </button>
+            </div>
+
+            <div>
+              <button class="toggle-btn" onclick="restartGame()">🔄 Restart from Beginning</button>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      } else {
+        // ADVENTURE 3 COMPLETE -> GRAND MASTER STICKER REWARD!
+        container.innerHTML = `
+          <div class="cert-box" style="background: linear-gradient(135deg, #fff0f6 0%, #fff3b0 50%, #e0fbfc 100%); border-color: #ff6b6b;">
+            <div style="font-size:1.15rem; font-weight:900; color:#d90429; letter-spacing:1px;">
+              🎉 ALL 3 ADVENTURES MASTERED! 🎉
+            </div>
+            <h1 style="font-size:2.1rem; color:#1d3557; margin:6px 0;">
+              Super Champion ${escapeHtml(playerName)}!
+            </h1>
+
+            <div style="display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap; margin:8px 0;">
+              ${SVG_ART.panda('happy', 105)}
+              <div class="panda-jump">${SVG_ART.stickerPack(165)}</div>
+              ${SVG_ART.rabbit(100)}
+            </div>
+
+            <div style="font-size:1.3rem; font-weight:900; color:#7209b7; margin-bottom:10px;">
+              🌟 Super Panda Sticker + All Trophies Unlocked! 🌟
+            </div>
+
+            <div style="background:#ffffff; border-radius:16px; padding:12px 18px; max-width:520px; margin:0 auto 14px; border:2px solid #ffadad; text-align:left; font-weight:700; color:#334155;">
+              <div>• Adventure 1 (Golden Trophy 🏆): <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Adventure 2 (Diamond Trophy 💎): <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Adventure 3 (Super Sticker 🌟): <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Grand Total Stars Earned: <span style="color:#d90429;">⭐ ${correctCount} / ${totalQuestionsAnswered}</span></div>
+            </div>
+
+            <div style="background:#d8f3dc; color:#1b4332; padding:10px 18px; border-radius:999px; display:inline-block; font-weight:800; font-size:1rem; margin-bottom:14px;">
+              🎟️ Show your teacher to claim your Sticker & Bonus ClassDojo Points!
+            </div>
+
+            <div>
+              <button class="btn-primary" onclick="restartGame()">
+                <span>🔄 Play Again</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }
     }
 
     function restartGame() {
       sfxClick();
+      currentAdventure = 1;
       currentStepIndex = 0;
       correctCount = 0;
+      totalQuestionsAnswered = 0;
       resetStepLocalState();
       currentScreen = 'start';
       render();
@@ -1771,7 +2693,6 @@
       }[m]));
     }
 
-    // Initialize game on load
     window.onload = function() {
       render();
     };
