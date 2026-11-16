@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Panda’s Adventure — 小熊猫的奇妙一天</title>
+  <style>
+    /* ==========================================================================
+       1. BASE & RESET (Offline-ready, Kid-friendly Typography & Palette)
+       ========================================================================== */
+    :root {
+      --bg-sky: #e0f4ff;
+      --bg-cream: #fffdf7;
+      --primary-orange: #ff9f1c;
+      --primary-orange-dark: #e08200;
+      --secondary-green: #2ec4b6;
+      --secondary-green-dark: #1fa396;
+      --accent-pink: #ff6b6b;
+      --accent-yellow: #ffd166;
+      --accent-purple: #8338ec;
+      --text-dark: #2b2d42;
+      --text-muted: #5c6378;
+      --card-shadow: 0 10px 25px rgba(43, 45, 66, 0.12);
+      --border-radius-lg: 24px;
+      --border-radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Comic Sans MS", "Chalkboard SE", "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #cbeeff 0%, #eaf8ff 60%, #d8f3dc 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       2. TOP NAVIGATION BAR (Progress, Pinyin Toggle, Sound Toggle)
+       ========================================================================== */
+    .top-bar {
+      width: 100%;
+      max-width: 1020px;
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      z-index: 50;
+    }
+
+    .brand-badge {
+      background: #ffffff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--text-dark);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chapter-pills {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-muted);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .pill.active {
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+      border-color: var(--primary-orange);
+      transform: scale(1.05);
+    }
+
+    .pill.done {
+      background: #b7e4c7;
+      color: #1b4332;
+    }
+
+    .controls-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      background: #ffffff;
+      border: 3px solid var(--secondary-green);
+      color: var(--text-dark);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 4px 0 var(--secondary-green-dark);
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+
+    .toggle-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--secondary-green-dark);
+    }
+
+    .toggle-btn.off {
+      border-color: #adb5bd;
+      box-shadow: 0 4px 0 #6c757d;
+      color: #6c757d;
+    }
+
+    /* ==========================================================================
+       3. MAIN STAGE CONTAINER
+       ========================================================================== */
+    .game-container {
+      width: 95%;
+      max-width: 980px;
+      background: var(--bg-cream);
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--card-shadow);
+      border: 5px solid #ffffff;
+      padding: 20px;
+      margin-bottom: 24px;
+      position: relative;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* ==========================================================================
+       4. PINYIN + HANZI RUBY DISPLAY
+       ========================================================================== */
+    .zh-phrase {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 4px;
+      line-height: 1.2;
+    }
+
+    .zh-word {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 2px;
+    }
+
+    .pinyin-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #d94e34;
+      letter-spacing: 0.5px;
+      min-height: 1.2em;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    body.hide-pinyin .pinyin-text {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .hanzi-text {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .zh-large .pinyin-text { font-size: 1.15rem; }
+    .zh-large .hanzi-text { font-size: 2.2rem; }
+
+    .zh-small .pinyin-text { font-size: 0.85rem; }
+    .zh-small .hanzi-text { font-size: 1.35rem; }
+
+    /* ==========================================================================
+       5. BUTTONS & INTERACTIVE CARDS
+       ========================================================================== */
+    .btn-primary {
+      background: linear-gradient(180deg, #ffb703 0%, #fb8500 100%);
+      color: #ffffff;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #c96200, 0 10px 20px rgba(251, 133, 0, 0.3);
+      transition: transform 0.12s, box-shadow 0.12s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-primary:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #c96200;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .choice-card {
+      background: #ffffff;
+      border: 4px solid #dce8f2;
+      border-radius: var(--border-radius-md);
+      padding: 16px 14px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 5px 0 #cbd9e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 92px;
+    }
+
+    .choice-card:hover {
+      border-color: var(--primary-orange);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 #f4a261;
+    }
+
+    .choice-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #cbd9e6;
+    }
+
+    .choice-card.correct {
+      background: #d8f3dc;
+      border-color: #2d6a4f;
+      box-shadow: 0 5px 0 #2d6a4f;
+      animation: popBounce 0.45s ease;
+    }
+
+    .choice-card.wrong {
+      background: #ffe5ec;
+      border-color: #e63946;
+      box-shadow: 0 5px 0 #e63946;
+      animation: shake 0.4s ease;
+    }
+
+    .choice-en {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* ==========================================================================
+       6. CARTOON SCENE BACKGROUNDS & SVG ANIMATIONS
+       ========================================================================== */
+    .scene-box {
+      width: 100%;
+      border-radius: 20px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+
+    .scene-classroom {
+      background: linear-gradient(180deg, #fff3b0 0%, #ffe8a3 68%, #d4a373 68%, #bc8a5f 100%);
+    }
+
+    .scene-street {
+      background: linear-gradient(180deg, #bde0fe 0%, #e0fbfc 65%, #95d5b2 65%, #74c69d 82%, #adb5bd 82%, #6c757d 100%);
+    }
+
+    .scene-sky {
+      background: linear-gradient(180deg, #4cc9f0 0%, #90e0ef 55%, #caf0f8 75%, #80ed99 75%, #57cc99 100%);
+    }
+
+    .speech-bubble {
+      background: #ffffff;
+      border: 3px solid var(--text-dark);
+      border-radius: 20px;
+      padding: 12px 18px;
+      position: relative;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      max-width: 90%;
+    }
+
+    .instruction-banner {
+      background: #edf6f9;
+      border-left: 6px solid var(--secondary-green);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #1d3557;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Drag & Drop + Click-to-Select Items */
+    .draggable-item {
+      cursor: grab;
+      transition: transform 0.2s, filter 0.2s;
+      touch-action: none;
+    }
+
+    .draggable-item:hover {
+      transform: scale(1.08);
+    }
+
+    .draggable-item.selected-item {
+      outline: 4px dashed var(--primary-orange);
+      outline-offset: 6px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      transform: scale(1.08);
+    }
+
+    .drop-zone {
+      border: 3px dashed #ff9f1c;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.65);
+      padding: 10px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .drop-zone.drag-over, .drop-zone:hover {
+      background: #fff3b0;
+      transform: scale(1.03);
+      border-style: solid;
+    }
+
+    /* Matching Pairs Board */
+    .match-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .match-tile {
+      background: #ffffff;
+      border: 3px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #cbd5e1;
+      transition: all 0.2s;
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .match-tile.selected {
+      border-color: var(--primary-orange);
+      background: #fff8eb;
+      box-shadow: 0 4px 0 var(--primary-orange);
+      transform: scale(1.03);
+    }
+
+    .match-tile.matched {
+      background: #d8f3dc;
+      border-color: #40916c;
+      box-shadow: 0 4px 0 #40916c;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    /* Animations */
+    @keyframes popBounce {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.12); }
+      70% { transform: scale(0.96); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes pandaHappyJump {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      30% { transform: translateY(-22px) rotate(-4deg); }
+      60% { transform: translateY(-10px) rotate(4deg); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+      75% { transform: translateX(-6px); }
+    }
+
+    @keyframes floatCloud {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .panda-jump {
+      animation: pandaHappyJump 0.8s ease infinite;
+    }
+
+    .cloud-float {
+      animation: floatCloud 3s ease-in-out infinite;
+    }
+
+    /* ==========================================================================
+       7. FEEDBACK TOAST OVERLAY (Non-blocking, Kid-friendly)
+       ========================================================================== */
+    .feedback-bar {
+      min-height: 54px;
+      margin-top: 12px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      transition: all 0.25s ease;
+    }
+
+    .feedback-neutral {
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .feedback-success {
+      background: #d8f3dc;
+      color: #1b4332;
+      border: 3px solid #52b788;
+      animation: popBounce 0.4s ease;
+    }
+
+    .feedback-retry {
+      background: #fff3cd;
+      color: #856404;
+      border: 3px solid #ffc107;
+      animation: shake 0.4s ease;
+    }
+
+    /* Start & Certificate Inputs */
+    .name-input {
+      width: 100%;
+      max-width: 340px;
+      padding: 14px 20px;
+      font-size: 1.25rem;
+      font-family: inherit;
+      font-weight: bold;
+      text-align: center;
+      border: 4px solid var(--secondary-green);
+      border-radius: 999px;
+      outline: none;
+      margin: 12px 0;
+      background: #ffffff;
+      color: var(--text-dark);
+    }
+
+    .name-input:focus {
+      border-color: var(--primary-orange);
+    }
+
+    .cert-box {
+      background: linear-gradient(135deg, #fffdf5 0%, #fff3b0 100%);
+      border: 6px double #ff9f1c;
+      border-radius: 24px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(255, 159, 28, 0.25);
+    }
+
+    @media (max-width: 640px) {
+      .hanzi-text { font-size: 1.45rem; }
+      .zh-large .hanzi-text { font-size: 1.75rem; }
+      .choice-grid { grid-template-columns: 1fr; }
+      .match-columns { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER BAR -->
+  <header class="top-bar">
+    <div class="brand-badge">
+      <span>🐼</span>
+      <span>Little Panda’s Adventure</span>
+    </div>
+
+    <div class="chapter-pills" id="chapterPills">
+      <div class="pill" id="pill-1">1. Pencil</div>
+      <div class="pill" id="pill-2">2. Home</div>
+      <div class="pill" id="pill-3">3. Rainbow</div>
+    </div>
+
+    <div class="controls-group">
+      <button class="toggle-btn" id="pinyinToggleBtn" onclick="togglePinyin()">
+        👁️ Hide Pinyin
+      </button>
+      <button class="toggle-btn" id="soundToggleBtn" onclick="toggleSound()">
+        🔊 Sound: ON
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN GAME CANVAS -->
+  <main class="game-container" id="gameContainer">
+    <!-- Dynamic screens rendered via JavaScript -->
+  </main>
+
+  <script>
+    /* ==========================================================================
+       1. SOUND EFFECTS ENGINE (Web Audio API - 100% Offline, No External Files)
+       ========================================================================== */
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTone(freq, type, duration, delay = 0) {
+      if (!soundEnabled) return;
+      initAudio();
+      if (!audioCtx) return;
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
+
+      gain.gain.setValueAtTime(0.18, audioCtx.currentTime + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(audioCtx.currentTime + delay);
+      osc.stop(audioCtx.currentTime + delay + duration);
+    }
+
+    function sfxClick() {
+      playTone(520, 'sine', 0.08);
+    }
+
+    function sfxCorrect() {
+      playTone(523.25, 'triangle', 0.14, 0);     // C5
+      playTone(659.25, 'triangle', 0.14, 0.11);  // E5
+      playTone(783.99, 'triangle', 0.25, 0.22);  // G5
+    }
+
+    function sfxWrong() {
+      playTone(260, 'sawtooth', 0.16, 0);
+      playTone(210, 'sawtooth', 0.22, 0.14);
+    }
+
+    function sfxChapterWin() {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((n, idx) => playTone(n, 'triangle', 0.22, idx * 0.12));
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('soundToggleBtn');
+      btn.textContent = soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+      btn.classList.toggle('off', !soundEnabled);
+      if (soundEnabled) sfxClick();
+    }
+
+    function togglePinyin() {
+      sfxClick();
+      const isHidden = document.body.classList.toggle('hide-pinyin');
+      const btn = document.getElementById('pinyinToggleBtn');
+      btn.textContent = isHidden ? '👁️ Show Pinyin' : '🙈 Hide Pinyin';
+    }
+
+    /* ==========================================================================
+       2. CUSTOM INLINE SVG CARTOON ARTWORK LIBRARY
+       ========================================================================== */
+    const SVG_ART = {
+      panda: (mood = 'normal', size = 140) => {
+        const isSad = mood === 'sad';
+        const isHappy = mood === 'happy';
+        const hasPencil = mood === 'pencil';
+        return `
+        <svg width="${size}" height="${size}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ears -->
+          <circle cx="48" cy="48" r="24" fill="#2b2d42"/>
+          <circle cx="152" cy="48" r="24" fill="#2b2d42"/>
+          <circle cx="48" cy="48" r="11" fill="#5c6378"/>
+          <circle cx="152" cy="48" r="11" fill="#5c6378"/>
+          <!-- Body -->
+          <ellipse cx="100" cy="155" rx="52" ry="40" fill="#ffffff" stroke="#2b2d42" stroke-width="5"/>
+          <path d="M52 135 Q100 155 148 135 L142 162 Q100 175 58 162 Z" fill="#2b2d42"/>
+          <!-- Arms -->
+          <ellipse cx="44" cy="145" rx="16" ry="26" transform="rotate(25 44 145)" fill="#2b2d42"/>
+          <ellipse cx="156" cy="145" rx="16" ry="26" transform="rotate(-25 156 145)" fill="#2b2d42"/>
+          <!-- Head -->
+          <ellipse cx="100" cy="92" rx="64" ry="54" fill="#ffffff" stroke="#2b2d42" stroke-width="5"/>
+          <!-- Eye Patches -->
+          <ellipse cx="73" cy="88" rx="18" ry="22" transform="rotate(-18 73 88)" fill="#2b2d42"/>
+          <ellipse cx="127" cy="88" rx="18" ry="22" transform="rotate(18 127 88)" fill="#2b2d42"/>
+          <!-- Eyes -->
+          ${isHappy || hasPencil ? `
+            <path d="M64 88 Q73 76 82 88" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M118 88 Q127 76 136 88" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
+          ` : `
+            <circle cx="74" cy="86" r="7" fill="#ffffff"/>
+            <circle cx="76" cy="84" r="3" fill="#2b2d42"/>
+            <circle cx="126" cy="86" r="7" fill="#ffffff"/>
+            <circle cx="124" cy="84" r="3" fill="#2b2d42"/>
+          `}
+          <!-- Cheeks -->
+          <ellipse cx="55" cy="108" rx="10" ry="6" fill="#ffadad" opacity="0.85"/>
+          <ellipse cx="145" cy="108" rx="10" ry="6" fill="#ffadad" opacity="0.85"/>
+          <!-- Nose & Mouth -->
+          <ellipse cx="100" cy="104" rx="9" ry="6" fill="#2b2d42"/>
+          ${isSad ? `
+            <path d="M88 124 Q100 112 112 124" stroke="#2b2d42" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M60 100 Q54 112 60 116 Q66 112 60 100 Z" fill="#4cc9f0"/>
+          ` : isHappy || hasPencil ? `
+            <path d="M84 114 Q100 134 116 114 Z" fill="#ff6b6b" stroke="#2b2d42" stroke-width="3"/>
+          ` : `
+            <path d="M88 115 Q100 125 112 115" stroke="#2b2d42" stroke-width="4" fill="none" stroke-linecap="round"/>
+          `}
+          <!-- Pencil in hand if unlocked -->
+          ${hasPencil ? `
+            <g transform="translate(132, 100) rotate(25)">
+              <rect x="0" y="0" width="16" height="58" rx="3" fill="#ffb703" stroke="#2b2d42" stroke-width="3"/>
+              <polygon points="0,58 16,58 8,74" fill="#ffe5d9" stroke="#2b2d42" stroke-width="3"/>
+              <polygon points="5,68 11,68 8,74" fill="#2b2d42"/>
+              <rect x="0" y="-10" width="16" height="12" rx="3" fill="#ff758f" stroke="#2b2d42" stroke-width="3"/>
+            </g>
+          ` : ''}
+        </svg>`;
+      },
+
+      rabbit: (size = 130) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Long Ears -->
+          <ellipse cx="76" cy="48" rx="15" ry="44" transform="rotate(-10 76 48)" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
+          <ellipse cx="76" cy="48" rx="7" ry="30" transform="rotate(-10 76 48)" fill="#ffccd5"/>
+          <ellipse cx="124" cy="48" rx="15" ry="44" transform="rotate(10 124 48)" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
+          <ellipse cx="124" cy="48" rx="7" ry="30" transform="rotate(10 124 48)" fill="#ffccd5"/>
+          <!-- Body -->
+          <ellipse cx="100" cy="158" rx="44" ry="36" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
+          <path d="M64 140 L136 140 L142 182 L58 182 Z" fill="#ff758f"/>
+          <!-- Head -->
+          <circle cx="100" cy="105" r="48" fill="#fff0f3" stroke="#2b2d42" stroke-width="4"/>
+          <!-- Eyes -->
+          <circle cx="82" cy="100" r="6" fill="#2b2d42"/>
+          <circle cx="84" cy="98" r="2.5" fill="#ffffff"/>
+          <circle cx="118" cy="100" r="6" fill="#2b2d42"/>
+          <circle cx="120" cy="98" r="2.5" fill="#ffffff"/>
+          <!-- Cheeks -->
+          <ellipse cx="68" cy="114" rx="8" ry="5" fill="#ff8fa3"/>
+          <ellipse cx="132" cy="114" rx="8" ry="5" fill="#ff8fa3"/>
+          <!-- Nose & Smile -->
+          <polygon points="95,112 105,112 100,118" fill="#ff4d6d"/>
+          <path d="M90 122 Q100 132 110 122" stroke="#2b2d42" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        </svg>`,
+
+      pencil: (size = 86) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(60,60) rotate(35) translate(-60,-60)">
+            <rect x="46" y="14" width="28" height="16" rx="5" fill="#ff758f" stroke="#2b2d42" stroke-width="4"/>
+            <rect x="46" y="28" width="28" height="10" fill="#ced4da" stroke="#2b2d42" stroke-width="4"/>
+            <rect x="46" y="38" width="28" height="52" fill="#ffb703" stroke="#2b2d42" stroke-width="4"/>
+            <line x1="55" y1="38" x2="55" y2="90" stroke="#fb8500" stroke-width="3"/>
+            <line x1="65" y1="38" x2="65" y2="90" stroke="#fb8500" stroke-width="3"/>
+            <polygon points="46,90 74,90 60,112" fill="#ffe5d9" stroke="#2b2d42" stroke-width="4"/>
+            <polygon points="55,104 65,104 60,112" fill="#2b2d42"/>
+          </g>
+        </svg>`,
+
+      schoolbag: (size = 86) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <path d="M44 28 Q60 10 76 28" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <rect x="24" y="30" width="72" height="76" rx="22" fill="#4361ee" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="34" y="62" width="52" height="34" rx="12" fill="#4cc9f0" stroke="#2b2d42" stroke-width="4"/>
+          <path d="M24 52 Q60 66 96 52" stroke="#2b2d42" stroke-width="4" fill="none"/>
+          <circle cx="60" cy="56" r="6" fill="#ffd166" stroke="#2b2d42" stroke-width="3"/>
+        </svg>`,
+
+      book: (size = 86) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="26" y="18" width="68" height="84" rx="10" fill="#2ec4b6" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="26" y="18" width="14" height="84" rx="4" fill="#1b9aaa" stroke="#2b2d42" stroke-width="4"/>
+          <rect x="48" y="34" width="36" height="22" rx="4" fill="#ffffff" stroke="#2b2d42" stroke-width="3"/>
+          <line x1="54" y1="42" x2="78" y2="42" stroke="#2b2d42" stroke-width="3"/>
+          <line x1="54" y1="49" x2="72" y2="49" stroke="#2b2d42" stroke-width="3"/>
+        </svg>`,
+
+      eraser: (size = 86) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(60,60) rotate(-25) translate(-60,-60)">
+            <rect x="22" y="40" width="76" height="40" rx="10" fill="#ffffff" stroke="#2b2d42" stroke-width="4"/>
+            <rect x="46" y="40" width="52" height="40" rx="8" fill="#ff6b6b" stroke="#2b2d42" stroke-width="4"/>
+          </g>
+        </svg>`,
+
+      ruler: (size = 86) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(60,60) rotate(-35) translate(-60,-60)">
+            <rect x="14" y="42" width="92" height="36" rx="6" fill="#ffd166" stroke="#2b2d42" stroke-width="4"/>
+            <line x1="28" y1="42" x2="28" y2="56" stroke="#2b2d42" stroke-width="3"/>
+            <line x1="44" y1="42" x2="44" y2="52" stroke="#2b2d42" stroke-width="3"/>
+            <line x1="60" y1="42" x2="60" y2="58" stroke="#2b2d42" stroke-width="3"/>
+            <line x1="76" y1="42" x2="76" y2="52" stroke="#2b2d42" stroke-width="3"/>
+            <line x1="92" y1="42" x2="92" y2="56" stroke="#2b2d42" stroke-width="3"/>
+          </g>
+        </svg>`,
+
+      house: (roofColor = '#ff6b6b', wallColor = '#fff3b0', hasBamboo = false, size = 145) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Chimney -->
+          <rect x="122" y="34" width="18" height="34" rx="4" fill="#8d99ae" stroke="#2b2d42" stroke-width="4"/>
+          <!-- Main Wall -->
+          <rect x="34" y="82" width="112" height="82" rx="8" fill="${wallColor}" stroke="#2b2d42" stroke-width="4"/>
+          <!-- Roof -->
+          <polygon points="20,86 90,26 160,86" fill="${roofColor}" stroke="#2b2d42" stroke-width="4" stroke-linejoin="round"/>
+          <!-- Door -->
+          <rect x="74" y="112" width="32" height="52" rx="14" fill="#bc6c25" stroke="#2b2d42" stroke-width="4"/>
+          <circle cx="99" cy="140" r="3.5" fill="#ffd166"/>
+          <!-- Windows -->
+          <rect x="44" y="102" width="22" height="22" rx="5" fill="#90e0ef" stroke="#2b2d42" stroke-width="3.5"/>
+          <rect x="114" y="102" width="22" height="22" rx="5" fill="#90e0ef" stroke="#2b2d42" stroke-width="3.5"/>
+          <!-- Bamboo Sign for Panda's Home -->
+          ${hasBamboo ? `
+            <circle cx="90" cy="64" r="16" fill="#ffffff" stroke="#2b2d42" stroke-width="3"/>
+            <circle cx="82" cy="54" r="5" fill="#2b2d42"/>
+            <circle cx="98" cy="54" r="5" fill="#2b2d42"/>
+            <circle cx="90" cy="65" r="11" fill="#ffffff" stroke="#2b2d42" stroke-width="2.5"/>
+            <circle cx="86" cy="64" r="2.5" fill="#2b2d42"/>
+            <circle cx="94" cy="64" r="2.5" fill="#2b2d42"/>
+            <!-- Bamboo stalks -->
+            <rect x="14" y="96" width="8" height="68" rx="3" fill="#52b788" stroke="#2b2d42" stroke-width="3"/>
+            <line x1="14" y1="118" x2="22" y2="118" stroke="#2b2d42" stroke-width="3"/>
+            <line x1="14" y1="140" x2="22" y2="140" stroke="#2b2d42" stroke-width="3"/>
+            <ellipse cx="10" cy="110" rx="8" ry="4" transform="rotate(-30 10 110)" fill="#40916c"/>
+          ` : ''}
+        </svg>`,
+
+      cloud: (size = 135, label = '') => `
+        <svg width="${size}" height="${size * 0.72}" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg">
+          <path d="M46 105 H138 A28 28 0 0 0 142 50 A38 38 0 0 0 70 38 A30 30 0 0 0 46 105 Z"
+                fill="#ffffff" stroke="#4cc9f0" stroke-width="5" stroke-linejoin="round"/>
+          ${label ? `<text x="92" y="80" text-anchor="middle" font-size="24" font-weight="bold" fill="#2b2d42">${label}</text>` : ''}
+        </svg>`,
+
+      sun: (size = 90) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="30" fill="#ffd166" stroke="#f77f00" stroke-width="4"/>
+          <g stroke="#f77f00" stroke-width="5" stroke-linecap="round">
+            <line x1="60" y1="10" x2="60" y2="22"/>
+            <line x1="60" y1="98" x2="60" y2="110"/>
+            <line x1="10" y1="60" x2="22" y2="60"/>
+            <line x1="98" y1="60" x2="110" y2="60"/>
+            <line x1="25" y1="25" x2="34" y2="34"/>
+            <line x1="86" y1="86" x2="95" y2="95"/>
+            <line x1="95" y1="25" x2="86" y2="34"/>
+            <line x1="34" y1="86" x2="25" y2="95"/>
+          </g>
+          <circle cx="51" cy="56" r="3" fill="#2b2d42"/>
+          <circle cx="69" cy="56" r="3" fill="#2b2d42"/>
+          <path d="M52 67 Q60 75 68 67" stroke="#2b2d42" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>`,
+
+      rainbow: (size = 240) => `
+        <svg width="${size}" height="${size * 0.6}" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 160 A120 120 0 0 1 270 160" fill="none" stroke="#ff595e" stroke-width="14" stroke-linecap="round"/>
+          <path d="M44 160 A106 106 0 0 1 256 160" fill="none" stroke="#ff924c" stroke-width="14" stroke-linecap="round"/>
+          <path d="M58 160 A92 92 0 0 1 242 160" fill="none" stroke="#ffca3a" stroke-width="14" stroke-linecap="round"/>
+          <path d="M72 160 A78 78 0 0 1 228 160" fill="none" stroke="#8ac926" stroke-width="14" stroke-linecap="round"/>
+          <path d="M86 160 A64 64 0 0 1 214 160" fill="none" stroke="#1982c4" stroke-width="14" stroke-linecap="round"/>
+          <path d="M100 160 A50 50 0 0 1 200 160" fill="none" stroke="#6a4c93" stroke-width="14" stroke-linecap="round"/>
+          <!-- Fluffy Clouds at Ends -->
+          <circle cx="34" cy="158" r="20" fill="#ffffff"/>
+          <circle cx="54" cy="162" r="16" fill="#ffffff"/>
+          <circle cx="266" cy="158" r="20" fill="#ffffff"/>
+          <circle cx="246" cy="162" r="16" fill="#ffffff"/>
+        </svg>`,
+
+      trophy: (size = 150) => `
+        <svg width="${size}" height="${size}" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Handles -->
+          <path d="M52 46 C22 46, 22 92, 56 92" fill="none" stroke="#ffb703" stroke-width="10" stroke-linecap="round"/>
+          <path d="M128 46 C158 46, 158 92, 124 92" fill="none" stroke="#ffb703" stroke-width="10" stroke-linecap="round"/>
+          <!-- Cup -->
+          <path d="M48 34 H132 L122 96 C118 116, 62 116, 58 96 Z" fill="#ffd166" stroke="#e08200" stroke-width="4"/>
+          <!-- Stem & Base -->
+          <rect x="80" y="110" width="20" height="28" fill="#ffb703" stroke="#e08200" stroke-width="3"/>
+          <rect x="54" y="138" width="72" height="18" rx="6" fill="#2b2d42"/>
+          <rect x="64" y="142" width="52" height="10" rx="3" fill="#ffd166"/>
+          <!-- Panda Emblem on Cup -->
+          <circle cx="77" cy="60" r="6" fill="#2b2d42"/>
+          <circle cx="103" cy="60" r="6" fill="#2b2d42"/>
+          <circle cx="90" cy="72" r="16" fill="#ffffff" stroke="#2b2d42" stroke-width="2.5"/>
+          <circle cx="84" cy="70" r="3.5" fill="#2b2d42"/>
+          <circle cx="96" cy="70" r="3.5" fill="#2b2d42"/>
+          <ellipse cx="90" cy="76" rx="3" ry="2" fill="#2b2d42"/>
+          <!-- Sparkles -->
+          <polygon points="30,22 33,30 41,33 33,36 30,44 27,36 19,33 27,30" fill="#ff9f1c"/>
+          <polygon points="150,20 153,28 161,31 153,34 150,42 147,34 139,31 147,28" fill="#ff9f1c"/>
+        </svg>`
+    };
+
+    /* ==========================================================================
+       3. CURRICULUM DATA (Lessons 4, 5, 6 Vocabulary & Key Sentences)
+       ========================================================================== */
+    // Helper to render Hanzi with Ruby Pinyin above each character
+    function renderZh(wordPairs, sizeClass = '') {
+      const html = wordPairs.map(([hanzi, pinyin]) => `
+        <span class="zh-word">
+          <span class="pinyin-text">${pinyin}</span>
+          <span class="hanzi-text">${hanzi}</span>
+        </span>
+      `).join('');
+      return `<span class="zh-phrase ${sizeClass}">${html}</span>`;
+    }
+
+    // Complete G2 Vocabulary Bank across Lessons 4, 5, and 6
+    const VOCAB_BANK = {
+      // Lesson 4: School Supplies & Borrowing
+      qianbi:   { zh: [['铅','qiān'],['笔','bǐ']], en: 'pencil', art: 'pencil' },
+      shubao:   { zh: [['书','shū'],['包','bāo']], en: 'schoolbag', art: 'schoolbag' },
+      shu:      { zh: [['书','shū']], en: 'book', art: 'book' },
+      xiangpi:  { zh: [['橡','xiàng'],['皮','pí']], en: 'eraser', art: 'eraser' },
+      chizi:    { zh: [['尺','chǐ'],['子','zi']], en: 'ruler', art: 'ruler' },
+      meiyou:   { zh: [['没','méi'],['有','yǒu']], en: 'do not have', art: null },
+      jie:      { zh: [['借','jiè']], en: 'borrow / lend', art: null },
+      keyi:     { zh: [['可','kě'],['以','yǐ']], en: 'can / may', art: null },
+
+      // Lesson 5: Home & Locations
+      jia:      { zh: [['家','jiā']], en: 'home / family', art: 'house' },
+      na:       { zh: [['那','nà']], en: 'that', art: null },
+      zhe:      { zh: [['这','zhè']], en: 'this', art: null },
+      shi:      { zh: [['是','shì']], en: 'is / am / are', art: null },
+      dui:      { zh: [['对','duì']], en: 'right / correct', art: null },
+      wode:     { zh: [['我','wǒ'],['的','de']], en: 'my / mine', art: null },
+      nide:     { zh: [['你','nǐ'],['的','de']], en: 'your / yours', art: null },
+
+      // Lesson 6: Rainbow, Sky & Looking
+      caihong:  { zh: [['彩','cǎi'],['虹','hóng']], en: 'rainbow', art: 'rainbow' },
+      kan:      { zh: [['看','kàn']], en: 'look / see', art: null },
+      nali:     { zh: [['哪','nǎ'],['里','lǐ']], en: 'where', art: null },
+      yun:      { zh: [['云','yún']], en: 'cloud', art: 'cloud' },
+      taiyang:  { zh: [['太','tài'],['阳','yáng']], en: 'sun', art: 'sun' },
+      kandao:   { zh: [['看','kàn'],['到','dào']], en: 'see / saw', art: null },
+      shenme:   { zh: [['什','shén'],['么','me']], en: 'what', art: null }
+    };
+
+    /* ==========================================================================
+       4. STRUCTURED GAME STEPS (All 3 Chapters + Interactive Tasks)
+       ========================================================================== */
+    const GAME_STEPS = [
+      // ===================== LESSON 4: PANDA'S PENCIL =====================
+      {
+        chapter: 1,
+        type: 'scene-drag-pencil',
+        instruction: 'Step 1: Read Little Panda’s words, then drag (or click) the pencil to help Little Panda!',
+        dialogueSpeaker: 'Little Panda',
+        dialogueZh: [['我','wǒ'],['没','méi'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']],
+        replySpeaker: 'Little Rabbit',
+        replyZh: [['你','nǐ'],['可','kě'],['以','yǐ'],['借','jiè'],['一','yī'],['支','zhī'],['我','wǒ'],['的','de'],['。','']]
+      },
+      {
+        chapter: 1,
+        type: 'vocab-en-to-zh',
+        instruction: 'Step 2: Choose the Chinese word for the English meaning.',
+        promptEn: 'schoolbag',
+        options: ['shubao', 'qianbi', 'xiangpi'],
+        answer: 'shubao'
+      },
+      {
+        chapter: 1,
+        type: 'vocab-zh-to-en',
+        instruction: 'Step 3: What does this Chinese word mean?',
+        promptZh: 'xiangpi',
+        options: ['eraser', 'ruler', 'pencil'],
+        answer: 'eraser'
+      },
+      {
+        chapter: 1,
+        type: 'vocab-en-to-zh',
+        instruction: 'Step 4: Which Chinese word means “borrow / lend”?',
+        promptEn: 'borrow / lend',
+        options: ['jie', 'meiyou', 'shu'],
+        answer: 'jie'
+      },
+      {
+        chapter: 1,
+        type: 'match-pairs',
+        instruction: 'Step 5: Click a Chinese card, then click its matching English meaning!',
+        pairs: ['qianbi', 'shu', 'chizi', 'meiyou']
+      },
+      {
+        chapter: 1,
+        type: 'sentence-meaning',
+        instruction: 'Step 6: Sentence Challenge! What does Little Panda say?',
+        sentenceZh: [['我','wǒ'],['没','méi'],['有','yǒu'],['铅','qiān'],['笔','bǐ'],['。','']],
+        options: [
+          { text: 'I do not have a pencil.', correct: true },
+          { text: 'I have a big schoolbag.', correct: false },
+          { text: 'Where is my book?', correct: false }
+        ]
+      },
+      {
+        chapter: 1,
+        type: 'sentence-meaning',
+        instruction: 'Step 7: Sentence Challenge! What does Little Rabbit say?',
+        sentenceZh: [['你','nǐ'],['可','kě'],['以','yǐ'],['借','jiè'],['一','yī'],['支','zhī'],['我','wǒ'],['的','de'],['。','']],
+        options: [
+          { text: 'You can borrow one of mine.', correct: true },
+          { text: 'Look at the rainbow!', correct: false },
+          { text: 'Is that your home?', correct: false }
+        ],
+        chapterComplete: true
+      },
+
+      // ===================== LESSON 5: FIND PANDA'S HOME =====================
+      {
+        chapter: 2,
+        type: 'vocab-zh-to-en',
+        instruction: 'Step 1: Let’s help Little Panda go home! What does this word mean?',
+        promptZh: 'jia',
+        options: ['home / family', 'schoolbag', 'cloud'],
+        answer: 'home / family'
+      },
+      {
+        chapter: 2,
+        type: 'vocab-en-to-zh',
+        instruction: 'Step 2: Choose the Chinese word for “that”.',
+        promptEn: 'that',
+        options: ['na', 'zhe', 'dui'],
+        answer: 'na'
+      },
+      {
+        chapter: 2,
+        type: 'match-pairs',
+        instruction: 'Step 3: Match the Lesson 5 Chinese words with their English meanings!',
+        pairs: ['dui', 'wode', 'nide', 'shi']
+      },
+      {
+        chapter: 2,
+        type: 'sentence-meaning',
+        instruction: 'Step 4: Little Rabbit asks a question. What does it mean?',
+        sentenceZh: [['那','nà'],['是','shì'],['你','nǐ'],['家','jiā'],['吗','ma'],['？','']],
+        options: [
+          { text: 'Is that your home?', correct: true },
+          { text: 'I do not have a pencil.', correct: false },
+          { text: 'I see nothing at all.', correct: false }
+        ]
+      },
+      {
+        chapter: 2,
+        type: 'sentence-meaning',
+        instruction: 'Step 5: Little Panda answers! What does it mean?',
+        sentenceZh: [['对','duì'],['，',''],['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']],
+        options: [
+          { text: 'Yes (right), that is my home.', correct: true },
+          { text: 'Where is the sun?', correct: false },
+          { text: 'You can borrow my ruler.', correct: false }
+        ]
+      },
+      {
+        chapter: 2,
+        type: 'scene-find-home',
+        instruction: 'Step 6: Read the clue and click Little Panda’s house!',
+        clueZh: [['那','nà'],['是','shì'],['我','wǒ'],['家','jiā'],['。','']],
+        clueHint: 'Clue: Little Panda loves bamboo and has a panda sign on the roof!',
+        chapterComplete: true
+      },
+
+      // ===================== LESSON 6: FIND THE RAINBOW =====================
+      {
+        chapter: 3,
+        type: 'vocab-en-to-zh',
+        instruction: 'Step 1: Look up at the sky! Choose the Chinese word for “rainbow”.',
+        promptEn: 'rainbow',
+        options: ['caihong', 'taiyang', 'yun'],
+        answer: 'caihong'
+      },
+      {
+        chapter: 3,
+        type: 'vocab-zh-to-en',
+        instruction: 'Step 2: What does this Chinese word mean?',
+        promptZh: 'nali',
+        options: ['where', 'what', 'eraser'],
+        answer: 'where'
+      },
+      {
+        chapter: 3,
+        type: 'match-pairs',
+        instruction: 'Step 3: Match all the sky & looking words!',
+        pairs: ['kan', 'yun', 'taiyang', 'shenme']
+      },
+      {
+        chapter: 3,
+        type: 'sentence-meaning',
+        instruction: 'Step 4: Little Rabbit shouts excitedly! What does this mean?',
+        sentenceZh: [['看','kàn'],['彩','cǎi'],['虹','hóng'],['！','']],
+        options: [
+          { text: 'Look at the rainbow!', correct: true },
+          { text: 'Is that your home?', correct: false },
+          { text: 'I do not have a book.', correct: false }
+        ]
+      },
+      {
+        chapter: 3,
+        type: 'sentence-meaning',
+        instruction: 'Step 5: Little Panda looks around and says this. What does it mean?',
+        sentenceZh: [['在','zài'],['哪','nǎ'],['里','lǐ'],['？',''],['我','wǒ'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['看','kàn'],['到','dào'],['。','']],
+        options: [
+          { text: 'Where? I didn’t see anything.', correct: true },
+          { text: 'Yes, that is my schoolbag.', correct: false },
+          { text: 'You can borrow my pencil.', correct: false }
+        ]
+      },
+      {
+        chapter: 3,
+        type: 'scene-find-rainbow',
+        instruction: 'Step 6: Click the clouds in the sky to help Little Panda find the rainbow!',
+        chapterComplete: true
+      }
+    ];
+
+    /* ==========================================================================
+       5. GAME STATE & RENDER ENGINE
+       ========================================================================== */
+    let playerName = 'Little Explorer';
+    let currentScreen = 'start'; // 'start' | 'play' | 'chapter-celebration' | 'victory'
+    let currentStepIndex = 0;
+    let correctCount = 0;
+    let selectedTool = null;     // For click-to-move pencil alternative
+    let matchSelectedLeft = null;
+    let matchSelectedRight = null;
+    let matchedKeys = new Set();
+    let cloudsClicked = 0;
+
+    const container = document.getElementById('gameContainer');
+
+    function updateProgressPills() {
+      const step = GAME_STEPS[currentStepIndex];
+      const activeChap = currentScreen === 'victory' ? 4 : (step ? step.chapter : 0);
+
+      for (let c = 1; c <= 3; c++) {
+        const pill = document.getElementById(`pill-${c}`);
+        pill.classList.remove('active', 'done');
+        if (currentScreen === 'start') continue;
+        if (c < activeChap || currentScreen === 'victory') {
+          pill.classList.add('done');
+          pill.textContent = `✅ ${c}. ${c === 1 ? 'Pencil' : c === 2 ? 'Home' : 'Rainbow'}`;
+        } else if (c === activeChap) {
+          pill.classList.add('active');
+          pill.textContent = `⭐ ${c}. ${c === 1 ? 'Pencil' : c === 2 ? 'Home' : 'Rainbow'}`;
+        } else {
+          pill.textContent = `${c}. ${c === 1 ? 'Pencil' : c === 2 ? 'Home' : 'Rainbow'}`;
+        }
+      }
+    }
+
+    function setFeedback(type, message) {
+      const fb = document.getElementById('feedbackBar');
+      if (!fb) return;
+      fb.className = `feedback-bar feedback-${type}`;
+      fb.innerHTML = message;
+    }
+
+    function advanceStep() {
+      const step = GAME_STEPS[currentStepIndex];
+      correctCount++;
+      sfxCorrect();
+
+      setTimeout(() => {
+        if (step.chapterComplete) {
+          sfxChapterWin();
+          currentScreen = 'chapter-celebration';
+          render();
+        } else {
+          currentStepIndex++;
+          resetStepLocalState();
+          render();
+        }
+      }, 1150);
+    }
+
+    function resetStepLocalState() {
+      selectedTool = null;
+      matchSelectedLeft = null;
+      matchSelectedRight = null;
+      matchedKeys = new Set();
+      cloudsClicked = 0;
+    }
+
+    /* ==========================================================================
+       6. SCREEN RENDERERS
+       ========================================================================== */
+    function render() {
+      updateProgressPills();
+
+      if (currentScreen === 'start') {
+        renderStartScreen();
+      } else if (currentScreen === 'chapter-celebration') {
+        renderChapterCelebration();
+      } else if (currentScreen === 'victory') {
+        renderVictoryScreen();
+      } else {
+        renderGameStep();
+      }
+    }
+
+    // --- START SCREEN ---
+    function renderStartScreen() {
+      container.innerHTML = `
+        <div style="text-align:center; padding: 10px 0;">
+          <div style="display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap;">
+            ${SVG_ART.panda('happy', 155)}
+            ${SVG_ART.rainbow(190)}
+            ${SVG_ART.rabbit(135)}
+          </div>
+
+          <h1 style="font-size: 2.1rem; margin: 8px 0 4px; color: #1d3557;">
+            Little Panda’s Adventure
+          </h1>
+          <div style="margin-bottom: 14px;">
+            ${renderZh([['小','xiǎo'],['熊','xióng'],['猫','māo'],['的','de'],['奇','qí'],['妙','miào'],['一','yī'],['天','tiān']], 'zh-large')}
+          </div>
+
+          <div style="background:#edf6f9; border-radius:18px; padding:14px 20px; max-width:650px; margin:0 auto 16px; text-align:left; border: 2px solid #bee1e6;">
+            <div style="font-weight:800; color:#1d3557; margin-bottom:6px; font-size:1.05rem;">🎮 How to Play:</div>
+            <ul style="margin:0; padding-left:20px; color:#334155; line-height:1.6; font-size:0.98rem;">
+              <li>Help <b>Little Panda</b> solve 3 fun adventures: <b>Pencil</b>, <b>Home</b>, and <b>Rainbow</b>!</li>
+              <li>Click cards, match words, and drag or tap items to answer.</li>
+              <li>Use <b>Show / Hide Pinyin</b> in the top-right corner anytime you need help!</li>
+            </ul>
+          </div>
+
+          <div>
+            <label for="playerNameInput" style="display:block; font-weight:800; font-size:1.1rem; color:#2b2d42;">
+              ✏️ Type Your Name:
+            </label>
+            <input type="text" id="playerNameInput" class="name-input" placeholder="Enter your name..." maxlength="24" />
+          </div>
+
+          <div style="margin-top: 10px;">
+            <button class="btn-primary" onclick="startGame()">
+              <span>🚀 Start Game</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function startGame() {
+      sfxClick();
+      const input = document.getElementById('playerNameInput');
+      if (input && input.value.trim()) {
+        playerName = input.value.trim();
+      }
+      currentStepIndex = 0;
+      correctCount = 0;
+      resetStepLocalState();
+      currentScreen = 'play';
+      render();
+    }
+
+    // --- ACTIVE STEP SCREEN ---
+    function renderGameStep() {
+      const step = GAME_STEPS[currentStepIndex];
+      const chapterTitles = {
+        1: 'Lesson 4 — Panda’s Pencil',
+        2: 'Lesson 5 — Find Panda’s Home',
+        3: 'Lesson 6 — Find the Rainbow'
+      };
+
+      let bodyHtml = '';
+
+      if (step.type === 'scene-drag-pencil') {
+        bodyHtml = renderSceneDragPencil(step);
+      } else if (step.type === 'vocab-en-to-zh') {
+        bodyHtml = renderVocabEnToZh(step);
+      } else if (step.type === 'vocab-zh-to-en') {
+        bodyHtml = renderVocabZhToEn(step);
+      } else if (step.type === 'match-pairs') {
+        bodyHtml = renderMatchPairs(step);
+      } else if (step.type === 'sentence-meaning') {
+        bodyHtml = renderSentenceMeaning(step);
+      } else if (step.type === 'scene-find-home') {
+        bodyHtml = renderSceneFindHome(step);
+      } else if (step.type === 'scene-find-rainbow') {
+        bodyHtml = renderSceneFindRainbow(step);
+      }
+
+      container.innerHTML = `
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="background:#ffd166; padding:5px 14px; border-radius:999px; font-weight:800; font-size:0.95rem;">
+              ${chapterTitles[step.chapter]}
+            </span>
+            <span style="font-weight:800; color:#5c6378; font-size:0.95rem;">
+              ⭐ Stars Earned: ${correctCount}
+            </span>
+          </div>
+
+          <div class="instruction-banner">
+            <span>${step.instruction}</span>
+          </div>
+
+          ${bodyHtml}
+        </div>
+
+        <div id="feedbackBar" class="feedback-bar feedback-neutral">
+          Take your time and choose the best answer!
+        </div>
+      `;
+
+      if (step.type === 'scene-drag-pencil') {
+        setupDragAndDropEvents();
+      }
+    }
+
+    // --- TASK TYPE A: LESSON 4 INTERACTIVE CLASSROOM DRAG / CLICK PENCIL ---
+    function renderSceneDragPencil(step) {
+      return `
+        <div class="scene-box scene-classroom">
+          <!-- Classroom Chalkboard -->
+          <div style="background:#2d6a4f; border:6px solid #bc6c25; border-radius:14px; padding:10px; color:#ffffff; text-align:center; max-width:440px; margin:0 auto 14px;">
+            <div style="font-size:0.85rem; opacity:0.9;">Classroom Story</div>
+            <div style="display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:8px; margin-top:4px;">
+              <div class="speech-bubble" style="color:#2b2d42;">
+                <div style="font-size:0.8rem; font-weight:bold; color:#e63946;">🐼 Little Panda:</div>
+                ${renderZh(step.dialogueZh, 'zh-small')}
+              </div>
+              <div class="speech-bubble" style="color:#2b2d42;">
+                <div style="font-size:0.8rem; font-weight:bold; color:#2a9d8f;">🐰 Little Rabbit:</div>
+                ${renderZh(step.replyZh, 'zh-small')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Characters & Drop Zone -->
+          <div style="display:flex; justify-content:space-around; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-top:8px;">
+            <div id="pandaDropZone" class="drop-zone" onclick="handleDropZoneClick()" style="text-align:center; min-width:190px;">
+              <div id="pandaAvatarHolder">${SVG_ART.panda('sad', 135)}</div>
+              <div style="font-weight:800; background:#ffffff; border-radius:999px; padding:4px 12px; margin-top:4px;">
+                Drop / Tap Pencil Here!
+              </div>
+            </div>
+
+            <!-- Desk with School Supplies -->
+            <div style="background:#f4a261; border:4px solid #2b2d42; border-radius:18px; padding:12px 18px; text-align:center;">
+              <div style="font-weight:800; color:#2b2d42; margin-bottom:8px;">
+                🐰 Little Rabbit’s Desk (Drag or Tap):
+              </div>
+              <div style="display:flex; gap:14px; justify-content:center; align-items:center; flex-wrap:wrap;">
+                <div class="draggable-item" draggable="true" data-item="schoolbag" onclick="selectDeskItem('schoolbag', this)" style="background:#fff; padding:8px; border-radius:14px; border:3px solid #2b2d42;">
+                  ${SVG_ART.schoolbag(72)}
+                  <div>${renderZh(VOCAB_BANK.shubao.zh, 'zh-small')}</div>
+                </div>
+                <div class="draggable-item" draggable="true" data-item="pencil" onclick="selectDeskItem('pencil', this)" style="background:#fff; padding:8px; border-radius:14px; border:3px solid #2b2d42;">
+                  ${SVG_ART.pencil(72)}
+                  <div>${renderZh(VOCAB_BANK.qianbi.zh, 'zh-small')}</div>
+                </div>
+                <div class="draggable-item" draggable="true" data-item="book" onclick="selectDeskItem('book', this)" style="background:#fff; padding:8px; border-radius:14px; border:3px solid #2b2d42;">
+                  ${SVG_ART.book(72)}
+                  <div>${renderZh(VOCAB_BANK.shu.zh, 'zh-small')}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function setupDragAndDropEvents() {
+      const draggables = document.querySelectorAll('.draggable-item');
+      const dropZone = document.getElementById('pandaDropZone');
+
+      draggables.forEach(el => {
+        el.addEventListener('dragstart', (e) => {
+          selectedTool = el.getAttribute('data-item');
+          e.dataTransfer.setData('text/plain', selectedTool);
+        });
+      });
+
+      if (dropZone) {
+        dropZone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          dropZone.classList.add('drag-over');
+        });
+        dropZone.addEventListener('dragleave', () => {
+          dropZone.classList.remove('drag-over');
+        });
+        dropZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dropZone.classList.remove('drag-over');
+          const item = e.dataTransfer.getData('text/plain') || selectedTool;
+          evaluatePencilDelivery(item);
+        });
+      }
+    }
+
+    function selectDeskItem(itemKey, el) {
+      sfxClick();
+      document.querySelectorAll('.draggable-item').forEach(d => d.classList.remove('selected-item'));
+      el.classList.add('selected-item');
+      selectedTool = itemKey;
+      setFeedback('neutral', `Selected! Now click on Little Panda to give it!`);
+    }
+
+    function handleDropZoneClick() {
+      if (!selectedTool) {
+        sfxClick();
+        setFeedback('retry', 'First tap or drag an item from Little Rabbit’s desk!');
+        return;
+      }
+      evaluatePencilDelivery(selectedTool);
+    }
+
+    let pencilDelivered = false;
+    function evaluatePencilDelivery(itemKey) {
+      if (pencilDelivered) return;
+      if (itemKey === 'pencil') {
+        pencilDelivered = true;
+        const holder = document.getElementById('pandaAvatarHolder');
+        if (holder) {
+          holder.innerHTML = SVG_ART.panda('pencil', 135);
+          holder.classList.add('panda-jump');
+        }
+        setFeedback('success', '⭐ Awesome! Little Panda got the pencil (铅笔)! +1 Star!');
+        setTimeout(() => { pencilDelivered = false; }, 1400);
+        advanceStep();
+      } else {
+        sfxWrong();
+        setFeedback('retry', 'Oops! Little Panda needs a pencil (铅笔). Try Again!');
+      }
+    }
+
+    // --- TASK TYPE B: ENGLISH -> CHINESE ---
+    function renderVocabEnToZh(step) {
+      const cards = step.options.map(key => {
+        const item = VOCAB_BANK[key];
+        const artHtml = item.art && SVG_ART[item.art] ? `<div style="margin-bottom:6px;">${SVG_ART[item.art](68)}</div>` : '';
+        return `
+          <div class="choice-card" onclick="checkSimpleChoice(this, '${key === step.answer}')">
+            ${artHtml}
+            ${renderZh(item.zh, 'zh-large')}
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div style="text-align:center; background:#ffffff; border-radius:20px; padding:22px; border:3px solid #e2e8f0;">
+          <div style="font-size:1rem; color:#5c6378; font-weight:700;">English Meaning:</div>
+          <div style="font-size:2.1rem; font-weight:900; color:#1d3557; margin-top:4px;">
+            “${step.promptEn}”
+          </div>
+        </div>
+        <div class="choice-grid">${cards}</div>
+      `;
+    }
+
+    // --- TASK TYPE C: CHINESE -> ENGLISH ---
+    function renderVocabZhToEn(step) {
+      const promptItem = VOCAB_BANK[step.promptZh];
+      const artHtml = promptItem.art && SVG_ART[promptItem.art]
+        ? `<div style="margin-bottom:6px;">${SVG_ART[promptItem.art](82)}</div>`
+        : '';
+
+      const cards = step.options.map(enOpt => `
+        <div class="choice-card" onclick="checkSimpleChoice(this, '${enOpt === step.answer}')">
+          <div class="choice-en">${enOpt}</div>
+        </div>
+      `).join('');
+
+      return `
+        <div style="text-align:center; background:#ffffff; border-radius:20px; padding:22px; border:3px solid #e2e8f0;">
+          ${artHtml}
+          <div style="margin-top:4px;">
+            ${renderZh(promptItem.zh, 'zh-large')}
+          </div>
+        </div>
+        <div class="choice-grid">${cards}</div>
+      `;
+    }
+
+    // --- TASK TYPE D: MATCHING PAIRS (Click Chinese -> Click English) ---
+    function renderMatchPairs(step) {
+      // Deterministic shuffle for right column so it isn't always straight across
+      const leftKeys = [...step.pairs];
+      const rightKeys = [...step.pairs].reverse();
+      if (rightKeys.length >= 3) {
+        const temp = rightKeys[0];
+        rightKeys[0] = rightKeys[1];
+        rightKeys[1] = temp;
+      }
+
+      const leftHtml = leftKeys.map(k => {
+        const isMatched = matchedKeys.has(k);
+        const isSelected = matchSelectedLeft === k;
+        return `
+          <div class="match-tile ${isMatched ? 'matched' : ''} ${isSelected ? 'selected' : ''}"
+               onclick="selectMatchLeft('${k}')">
+            ${renderZh(VOCAB_BANK[k].zh)}
+          </div>
+        `;
+      }).join('');
+
+      const rightHtml = rightKeys.map(k => {
+        const isMatched = matchedKeys.has(k);
+        const isSelected = matchSelectedRight === k;
+        return `
+          <div class="match-tile ${isMatched ? 'matched' : ''} ${isSelected ? 'selected' : ''}"
+               onclick="selectMatchRight('${k}')">
+            <span class="choice-en">${VOCAB_BANK[k].en}</span>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="match-columns">
+          <div class="match-col">${leftHtml}</div>
+          <div class="match-col">${rightHtml}</div>
+        </div>
+      `;
+    }
+
+    function selectMatchLeft(key) {
+      if (matchedKeys.has(key)) return;
+      sfxClick();
+      matchSelectedLeft = key;
+      evaluateMatchAttempt();
+    }
+
+    function selectMatchRight(key) {
+      if (matchedKeys.has(key)) return;
+      sfxClick();
+      matchSelectedRight = key;
+      evaluateMatchAttempt();
+    }
+
+    function evaluateMatchAttempt() {
+      const step = GAME_STEPS[currentStepIndex];
+      if (matchSelectedLeft && matchSelectedRight) {
+        if (matchSelectedLeft === matchSelectedRight) {
+          matchedKeys.add(matchSelectedLeft);
+          matchSelectedLeft = null;
+          matchSelectedRight = null;
+          render();
+          if (matchedKeys.size === step.pairs.length) {
+            setFeedback('success', '⭐ All pairs matched! Great job!');
+            advanceStep();
+          } else {
+            sfxCorrect();
+            setFeedback('success', '⭐ Nice match! Keep going!');
+          }
+        } else {
+          sfxWrong();
+          matchSelectedLeft = null;
+          matchSelectedRight = null;
+          render();
+          setFeedback('retry', 'Not a match! Try Again!');
+        }
+      } else {
+        render();
+      }
+    }
+
+    // --- TASK TYPE E: SENTENCE COMPREHENSION ---
+    function renderSentenceMeaning(step) {
+      const cards = step.options.map(opt => `
+        <div class="choice-card" onclick="checkSimpleChoice(this, '${opt.correct}')">
+          <div class="choice-en">${opt.text}</div>
+        </div>
+      `).join('');
+
+      return `
+        <div style="display:flex; align-items:center; justify-content:center; gap:16px; background:#ffffff; border-radius:20px; padding:18px; border:3px solid #e2e8f0; flex-wrap:wrap;">
+          ${SVG_ART.panda('normal', 95)}
+          <div class="speech-bubble">
+            ${renderZh(step.sentenceZh, 'zh-large')}
+          </div>
+        </div>
+        <div class="choice-grid">${cards}</div>
+      `;
+    }
+
+    // --- TASK TYPE F: LESSON 5 FIND PANDA'S HOME SCENE ---
+    function renderSceneFindHome(step) {
+      return `
+        <div class="scene-box scene-street">
+          <div style="display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
+            <div id="streetPanda">${SVG_ART.panda('normal', 105)}</div>
+            <div class="speech-bubble">
+              ${renderZh(step.clueZh)}
+              <div style="font-size:0.92rem; color:#457b9d; font-weight:700; margin-top:4px;">
+                ${step.clueHint}
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-around; align-items:flex-end; flex-wrap:wrap; gap:12px;">
+            <div class="choice-card" style="background:rgba(255,255,255,0.85);" onclick="checkHouseChoice(this, false)">
+              ${SVG_ART.house('#4361ee', '#ffffff', false, 130)}
+              <div style="font-weight:800; margin-top:4px;">House A</div>
+            </div>
+            <div class="choice-card" style="background:rgba(255,255,255,0.85);" onclick="checkHouseChoice(this, true)">
+              ${SVG_ART.house('#ff6b6b', '#fff3b0', true, 130)}
+              <div style="font-weight:800; margin-top:4px;">House B</div>
+            </div>
+            <div class="choice-card" style="background:rgba(255,255,255,0.85);" onclick="checkHouseChoice(this, false)">
+              ${SVG_ART.house('#8338ec', '#e0fbfc', false, 130)}
+              <div style="font-weight:800; margin-top:4px;">House C</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    let stepLocked = false;
+    function checkHouseChoice(el, isCorrect) {
+      if (stepLocked) return;
+      if (isCorrect) {
+        stepLocked = true;
+        el.classList.add('correct');
+        const p = document.getElementById('streetPanda');
+        if (p) {
+          p.innerHTML = SVG_ART.panda('happy', 105);
+          p.classList.add('panda-jump');
+        }
+        setFeedback('success', '⭐ 对，那是我家！Little Panda found home!');
+        setTimeout(() => { stepLocked = false; }, 1300);
+        advanceStep();
+      } else {
+        sfxWrong();
+        el.classList.add('wrong');
+        setTimeout(() => el.classList.remove('wrong'), 500);
+        setFeedback('retry', 'Not that house! Look for the bamboo and panda sign. Try Again!');
+      }
+    }
+
+    // --- TASK TYPE G: LESSON 6 FIND THE RAINBOW SCENE ---
+    function renderSceneFindRainbow(step) {
+      return `
+        <div class="scene-box scene-sky" style="min-height:330px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            ${SVG_ART.sun(82)}
+            <div id="rainbowRevealArea" style="min-height:135px; display:flex; align-items:center; justify-content:center;">
+              <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+                <div class="cloud-float" style="cursor:pointer;" onclick="clickSkyCloud(this, 1)">
+                  ${SVG_ART.cloud(130, '☁️ 1')}
+                </div>
+                <div class="cloud-float" style="cursor:pointer; animation-delay:0.6s;" onclick="clickSkyCloud(this, 2)">
+                  ${SVG_ART.cloud(130, '☁️ 2')}
+                </div>
+                <div class="cloud-float" style="cursor:pointer; animation-delay:1.2s;" onclick="clickSkyCloud(this, 3)">
+                  ${SVG_ART.cloud(130, '☁️ 3')}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:10px;">
+            <div id="skyPanda">${SVG_ART.panda('normal', 110)}</div>
+            <div class="speech-bubble" id="skySpeech">
+              ${renderZh([['在','zài'],['哪','nǎ'],['里','lǐ'],['？','']])}
+            </div>
+            ${SVG_ART.rabbit(100)}
+          </div>
+        </div>
+      `;
+    }
+
+    function clickSkyCloud(cloudEl, cloudNum) {
+      if (stepLocked) return;
+      if (cloudEl.dataset.cleared === 'true') return;
+
+      cloudEl.dataset.cleared = 'true';
+      cloudEl.style.opacity = '0.25';
+      cloudEl.style.transform = 'scale(0.8)';
+      cloudsClicked++;
+
+      const speech = document.getElementById('skySpeech');
+      if (cloudsClicked < 3) {
+        sfxClick();
+        if (speech) {
+          speech.innerHTML = renderZh([['我','wǒ'],['什','shén'],['么','me'],['也','yě'],['没','méi'],['看','kàn'],['到','dào'],['。','']]);
+        }
+        setFeedback('neutral', `Cloud ${cloudNum} moved! “我什么也没看到。” Click another cloud!`);
+      } else {
+        stepLocked = true;
+        const area = document.getElementById('rainbowRevealArea');
+        const panda = document.getElementById('skyPanda');
+        if (area) {
+          area.innerHTML = `<div style="animation: popBounce 0.6s ease;">${SVG_ART.rainbow(240)}</div>`;
+        }
+        if (speech) {
+          speech.innerHTML = renderZh([['看','kàn'],['彩','cǎi'],['虹','hóng'],['！','']], 'zh-large');
+        }
+        if (panda) {
+          panda.innerHTML = SVG_ART.panda('happy', 110);
+          panda.classList.add('panda-jump');
+        }
+        setFeedback('success', '🌈 看彩虹！You found the rainbow!');
+        setTimeout(() => { stepLocked = false; }, 1400);
+        advanceStep();
+      }
+    }
+
+    // --- GENERIC MULTIPLE CHOICE EVALUATOR ---
+    function checkSimpleChoice(cardEl, isCorrectStr) {
+      if (stepLocked) return;
+      const isCorrect = isCorrectStr === 'true';
+      if (isCorrect) {
+        stepLocked = true;
+        cardEl.classList.add('correct');
+        setFeedback('success', '⭐ Great job! +1 Star!');
+        setTimeout(() => { stepLocked = false; }, 1250);
+        advanceStep();
+      } else {
+        sfxWrong();
+        cardEl.classList.add('wrong');
+        setTimeout(() => cardEl.classList.remove('wrong'), 500);
+        setFeedback('retry', 'Try Again! You can do it!');
+      }
+    }
+
+    /* ==========================================================================
+       7. CHAPTER CELEBRATION & FINAL GOLDEN PANDA TROPHY SCREEN
+       ========================================================================== */
+    function renderChapterCelebration() {
+      const completedStep = GAME_STEPS[currentStepIndex];
+      const chap = completedStep.chapter;
+      const messages = {
+        1: { title: 'Lesson 4 Complete!', subtitle: 'Little Panda has a pencil now! (我有铅笔了！)', art: SVG_ART.panda('pencil', 150) },
+        2: { title: 'Lesson 5 Complete!', subtitle: 'Little Panda is safely home! (我回家了！)', art: SVG_ART.house('#ff6b6b', '#fff3b0', true, 150) },
+        3: { title: 'Lesson 6 Complete!', subtitle: 'Little Panda found the beautiful rainbow! (看到彩虹了！)', art: SVG_ART.rainbow(220) }
+      };
+      const info = messages[chap];
+
+      container.innerHTML = `
+        <div style="text-align:center; padding: 24px 12px;">
+          <div style="font-size:2.5rem;">🎉 ⭐ 🎉</div>
+          <h2 style="font-size:2rem; color:#1d3557; margin:8px 0;">${info.title}</h2>
+          <p style="font-size:1.2rem; font-weight:700; color:#2a9d8f; margin-bottom:16px;">${info.subtitle}</p>
+          <div class="panda-jump" style="margin: 12px 0;">${info.art}</div>
+          <div style="margin-top:20px;">
+            <button class="btn-primary" onclick="continueAfterChapter()">
+              <span>${chap < 3 ? 'Next Chapter ➡️' : 'Claim Golden Trophy 🏆'}</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function continueAfterChapter() {
+      sfxClick();
+      if (currentStepIndex + 1 < GAME_STEPS.length) {
+        currentStepIndex++;
+        resetStepLocalState();
+        currentScreen = 'play';
+      } else {
+        sfxChapterWin();
+        currentScreen = 'victory';
+      }
+      render();
+    }
+
+    function renderVictoryScreen() {
+      container.innerHTML = `
+        <div class="cert-box">
+          <div style="font-size:1.3rem; font-weight:900; color:#e08200; letter-spacing:1px;">
+            🌟 GRADE 2 CHINESE REVIEW CERTIFICATE 🌟
+          </div>
+          <h1 style="font-size:2.3rem; color:#1d3557; margin:8px 0;">
+            Congratulations, ${escapeHtml(playerName)}!
+          </h1>
+
+          <div style="display:flex; justify-content:center; align-items:center; gap:18px; flex-wrap:wrap; margin:10px 0;">
+            ${SVG_ART.panda('happy', 120)}
+            <div class="panda-jump">${SVG_ART.trophy(145)}</div>
+            ${SVG_ART.rabbit(110)}
+          </div>
+
+          <div style="font-size:1.35rem; font-weight:900; color:#d97706; margin-bottom:12px;">
+            🏆 Golden Panda Trophy Unlocked! 🏆
+          </div>
+
+          <div style="background:#ffffff; border-radius:16px; padding:14px 20px; max-width:520px; margin:0 auto 16px; border:2px solid #ffd166; text-align:left;">
+            <div style="font-weight:800; margin-bottom:6px; color:#2b2d42;">✅ Adventure Summary:</div>
+            <div style="line-height:1.7; font-weight:700; color:#334155;">
+              <div>• Lesson 4 — Panda’s Pencil: <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Lesson 5 — Find Panda’s Home: <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Lesson 6 — Find the Rainbow: <span style="color:#2d6a4f;">Completed ✅</span></div>
+              <div>• Stars Earned: <span style="color:#e08200;">⭐ ${correctCount} / ${GAME_STEPS.length}</span></div>
+            </div>
+          </div>
+
+          <div style="background:#d8f3dc; color:#1b4332; padding:10px 18px; border-radius:999px; display:inline-block; font-weight:800; font-size:1rem; margin-bottom:16px;">
+            🎟️ Show this screen to your teacher for ClassDojo points!
+          </div>
+
+          <div>
+            <button class="btn-primary" onclick="restartGame()">
+              <span>🔄 Play Again</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function restartGame() {
+      sfxClick();
+      currentStepIndex = 0;
+      correctCount = 0;
+      resetStepLocalState();
+      currentScreen = 'start';
+      render();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
+
+    // Initialize game on load
+    window.onload = function() {
+      render();
+    };
+  </script>
+</body>
+</html>
